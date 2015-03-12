@@ -11,6 +11,7 @@ class mitmproxy(ShutItModule):
 		shutit.install('python-pip python-dev libxml2-dev libxslt-dev libz-dev libffi-dev libssl-dev')
 		shutit.send('ln -s /usr/include/libxml2/libxml /usr/include/libxml')
 		shutit.send('pip install mitmproxy')
+		shutit.add_to_bashrc('export LANG=en_US.UTF-8')
 		return True
 
 def module():
