@@ -7,7 +7,9 @@ RUN git clone https://github.com/ianmiell/shutit.git
 WORKDIR shutit
 RUN pip install -r requirements.txt
 
-WORKDIR /space/git/shutit-examples/mitmproxy <- TODO You will likely need to to change this
+WORKDIR /opt
+RUN git clone https://github.com/ianmiell/shutit-examples.git
+WORKDIR shutit-examples/mitmproxy
 RUN /opt/shutit/shutit build --shutit_module_path /opt/shutit/library --delivery bash
 
 CMD ["/bin/bash"] 
