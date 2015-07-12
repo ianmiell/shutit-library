@@ -14,41 +14,11 @@
 #
 #THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 #IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#ITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
 #THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 #LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-# Python
-*.pyc
-# Configs
-**.cnf
-!**build.cnf
-!**push.cnf
-!**defaults.cnf
-# Logs
-**.log
-# Nohups and outs
-nohup.out
-out
-# Lock files
-**.lck
-# Docs
-docs/_build
-# Artifacts
-artifacts/*
-# Resources
-*resources/*
-!*resources/README.md
-!*shutit_resources/README.md
-# Keys
-examples/ianmiellaws/context/pems/*.pem
-pubring.gpg~
-secring.gpg
-examples/digital_ocean/context/access_token.dat
-# Show Config
-show_config/*
-build/*
-dist/*
-shutit.egg*
+# Example for running
+sudo docker run -t -h mysql_play_host -i myrepo/mysql /bin/bash

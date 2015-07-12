@@ -20,35 +20,4 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-# Python
-*.pyc
-# Configs
-**.cnf
-!**build.cnf
-!**push.cnf
-!**defaults.cnf
-# Logs
-**.log
-# Nohups and outs
-nohup.out
-out
-# Lock files
-**.lck
-# Docs
-docs/_build
-# Artifacts
-artifacts/*
-# Resources
-*resources/*
-!*resources/README.md
-!*shutit_resources/README.md
-# Keys
-examples/ianmiellaws/context/pems/*.pem
-pubring.gpg~
-secring.gpg
-examples/digital_ocean/context/access_token.dat
-# Show Config
-show_config/*
-build/*
-dist/*
-shutit.egg*
+docker run -t -i image /bin/bash

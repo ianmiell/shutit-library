@@ -20,35 +20,23 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-# Python
-*.pyc
-# Configs
-**.cnf
-!**build.cnf
-!**push.cnf
-!**defaults.cnf
-# Logs
-**.log
-# Nohups and outs
-nohup.out
-out
-# Lock files
-**.lck
-# Docs
-docs/_build
-# Artifacts
-artifacts/*
-# Resources
-*resources/*
-!*resources/README.md
-!*shutit_resources/README.md
-# Keys
-examples/ianmiellaws/context/pems/*.pem
-pubring.gpg~
-secring.gpg
-examples/digital_ocean/context/access_token.dat
-# Show Config
-show_config/*
-build/*
-dist/*
-shutit.egg*
+from shutit_module import ShutItModule
+
+class composer(ShutItModule):
+
+	def build(self, shutit):
+		shutit.install('curl')
+		shutit.install('php5')
+		shutit.send('pushd /tmp')
+		shutit.send('curl -sS https://getcomposer.org/installer | php')
+		shutit.send('mv composer.phar /usr/bin/composer')
+		shutit.send('popd')
+		return True
+
+def module():
+	return composer(
+		'shutit.tk.composer.composer', 0.315,
+		description='dependency manager for php: https://getcomposer.org/',
+		depends=['shutit.tk.setup']
+	)
+

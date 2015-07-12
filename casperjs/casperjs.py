@@ -20,35 +20,29 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-# Python
-*.pyc
-# Configs
-**.cnf
-!**build.cnf
-!**push.cnf
-!**defaults.cnf
-# Logs
-**.log
-# Nohups and outs
-nohup.out
-out
-# Lock files
-**.lck
-# Docs
-docs/_build
-# Artifacts
-artifacts/*
-# Resources
-*resources/*
-!*resources/README.md
-!*shutit_resources/README.md
-# Keys
-examples/ianmiellaws/context/pems/*.pem
-pubring.gpg~
-secring.gpg
-examples/digital_ocean/context/access_token.dat
-# Show Config
-show_config/*
-build/*
-dist/*
-shutit.egg*
+from shutit_module import ShutItModule
+
+class casperjs(ShutItModule):
+
+	def build(self, shutit):
+		shutit.install('git')
+		shutit.run_script("""
+			#!/bin/bash
+			cd /opt
+			git clone git://github.com/n1k0/casperjs.git
+			cd casperjs
+			git checkout tags/1.0.2
+		""", in_shell=False)
+		return True
+
+	def remove(self, shutit):
+		shutit.send('rm -rf /opt/casperjs')
+		return True
+
+def module():
+	return casperjs(
+		'shutit.tk.casperjs.casperjs', 0.314,
+		description='http://casperjs.org/',
+		depends=['shutit.tk.setup']
+	)
+
