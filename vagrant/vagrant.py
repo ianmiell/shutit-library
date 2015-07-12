@@ -60,17 +60,16 @@ class vagrant(ShutItModule):
 		# shutit.package_installed(package)  - Returns True if the package exists on the target
 		# shutit.set_password(password, user='')
 		#                                    - Set password for a given user on target
+		#if not shutit.command_available('vagrant'):
+		#	if shutit.get_input('vagrant apparently not installed. Would you like me to install it for you?',boolean=True):
+		#	    pw = shutit.get_input('Please input your sudo password in case it is needed.',ispass=True)
+		#	    command = shutit.get_input('Please input your install command, eg "apt-get install -y", or "yum install -y"')
+		#	    shutit.multisend('sudo ' + command + ' vagrant',{'assword':pw})
 		if not shutit.command_available('vagrant'):
-			if shutit.get_input('vagrant apparently not installed. Would you like me to install it for you?',boolean=True):
-			    pw = shutit.get_input('Please input your sudo password in case it is needed.',ispass=True)
-			    command = shutit.get_input('Please input your install command, eg "apt-get install -y", or "yum install -y"')
-			    shutit.multisend('sudo ' + command + ' vagrant',{'assword':pw})
-		if not shutit.command_available('vagrant'):
-		    shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
-		    shutit.send('dpkg -i /tmp/vagrant.deb')
-		    shutit.send('rm /tmp/vagrant.deb')
-		    shutit.send('mkdir -p ' + vagrant_dir)
-		    shutit.send('cd ' + vagrant_dir)
+			# TODO: not just ubuntu
+			shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
+			shutit.send('dpkg -i /tmp/vagrant.deb')
+			shutit.send('rm /tmp/vagrant.deb')
 		return True
 
 	def get_config(self, shutit):
