@@ -63,7 +63,7 @@ class virtualbox(ShutItModule):
 		shutit.install('build-essential')
 		shutit.send('wget http://download.virtualbox.org/virtualbox/5.0.0/virtualbox-5.0_5.0.0-101573~Ubuntu~trusty_amd64.deb')
 		shutit.send('dpkg -i virtualbox-5.0_5.0.0-101573~Ubuntu~trusty_amd64.deb',check_exit=False)
-		shutit.send('apt-get -f install')
+		shutit.send('apt-get -f -y install')
 		shutit.send('dpkg -i virtualbox-5.0_5.0.0-101573~Ubuntu~trusty_amd64.deb')
 		return True
 
