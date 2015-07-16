@@ -65,6 +65,7 @@ class vagrant(ShutItModule):
 		#	    pw = shutit.get_input('Please input your sudo password in case it is needed.',ispass=True)
 		#	    command = shutit.get_input('Please input your install command, eg "apt-get install -y", or "yum install -y"')
 		#	    shutit.multisend('sudo ' + command + ' vagrant',{'assword':pw})
+		cfg=shutit.cfg
 		if not shutit.command_available('vagrant'):
 			if cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'apt':
 				pw = shutit.get_env_pass('Input your sudo password to install virtualbox')
