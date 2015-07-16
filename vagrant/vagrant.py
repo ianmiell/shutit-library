@@ -72,7 +72,7 @@ class vagrant(ShutItModule):
 				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
 				shutit.multisend('sudo dpkg -i /tmp/vagrant.deb',{'assword':pw})
 			else:
-				shutit.install('virtualbox')
+				shutit.install('vagrant')
 		return True
 
 	def get_config(self, shutit):
