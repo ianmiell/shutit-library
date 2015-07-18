@@ -71,6 +71,10 @@ class vagrant(ShutItModule):
 				pw = shutit.get_env_pass('Input your sudo password to install virtualbox')
 				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
 				shutit.multisend('sudo dpkg -i /tmp/vagrant.deb',{'assword':pw})
+			elif cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'yum':
+				shutit.install('yum install ruby rubygems')
+				shutit.send('gem update --system')
+				shutit.send('gem install vagrant')
 			else:
 				shutit.install('vagrant')
 		return True
