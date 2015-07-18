@@ -73,7 +73,7 @@ class vagrant(ShutItModule):
 				shutit.multisend('sudo dpkg -i /tmp/vagrant.deb',{'assword':pw})
 			elif cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'yum':
 				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.rpm > /tmp/vagrant.deb',note='Downloading vagrant and installing')
-				shutit.install('rpm -i /tmp/vagrant.deb')
+				shutit.send('rpm -i /tmp/vagrant.deb')
 			else:
 				shutit.install('vagrant')
 		return True
