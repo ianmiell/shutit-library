@@ -15,7 +15,7 @@ class httpdiff(ShutItModule):
 
 def module():
 	return httpdiff(
-		'shutit.tk.httpdiff.httpdiff', 782914092.00,
+		'shutit.tk.httpdiff.httpdiff', 0.151352136461,
 		description='',
 		maintainer='',
 		depends=['shutit.tk.setup']
