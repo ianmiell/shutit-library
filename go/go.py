@@ -68,9 +68,8 @@ class go(ShutItModule):
 		shutit.send('./all.bash',note='Run the build script "all.bash"',check_exit=False)
 		shutit.send('mv /root/go/bin/go /usr/bin',note='Now move the binaries to standard paths')
 		shutit.send('mv /root/go/bin/gofmt /usr/bin')
-		shutit.send('mkdir -p /opt/go')
-		shutit.add_to_bashrc('export GOPATH=/opt/go')
 		shutit.send('mkdir -p /opt/go',note='Add a GOPATH to the environment.')
+		shutit.add_to_bashrc('export GOPATH=/opt/go')
 		shutit.send('rm -rf /root/go',note='Clean up source code')
 		return True
 
