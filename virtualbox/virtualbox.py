@@ -61,7 +61,8 @@ class virtualbox(ShutItModule):
 		# shutit.set_password(password, user='')
 		#                                    - Set password for a given user on target
 		cfg = shutit.cfg
-		shutit.install('build-essential wget')
+		shutit.install('build-essential')
+		shutit.install('wget')
 		if not shutit.command_available('sudo'):
 			shutit.install('sudo')
 		if not shutit.command_available('VBoxManage'):
