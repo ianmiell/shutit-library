@@ -16,8 +16,8 @@ class vagrant(ShutItModule):
 		#                                      by ShutIt with shell prompts.
 		# shutit.multisend(send,send_dict)   - Send a command, dict contains {expect1:response1,expect2:response2,...}
 		# shutit.send_and_get_output(send)   - Returns the output of the sent command
-		# shutit.send_and_match_output(send, matches) 
-		#                                    - Returns True if any lines in output match any of 
+		# shutit.send_and_match_output(send, matches)
+		#                                    - Returns True if any lines in output match any of
 		#                                      the regexp strings in the matches list
 		# shutit.send_until(send,regexps)    - Send command over and over until one of the regexps seen in the output.
 		# shutit.run_script(script)          - Run the passed-in string as a script
@@ -28,7 +28,7 @@ class vagrant(ShutItModule):
 		#                                      Use this if your env (or more specifically, prompt) changes at all,
 		#                                      eg reboot, bash, ssh
 		# shutit.logout(command='exit')      - Clean up from a login.
-		# 
+		#
 		# COMMAND HELPER FUNCTIONS
 		# shutit.add_to_bashrc(line)         - Add a line to bashrc
 		# shutit.get_url(fname, locations)   - Get a file via url from locations specified in a list
@@ -49,7 +49,7 @@ class vagrant(ShutItModule):
 		# shutit.send_host_dir(path, hostfilepath)
 		#                                    - Send directory and contents to path on the target
 		# shutit.insert_text(text, fname, pattern)
-		#                                    - Insert text into file fname after the first occurrence of 
+		#                                    - Insert text into file fname after the first occurrence of
 		#                                      regexp pattern.
 		# ENVIRONMENT QUERYING
 		# shutit.host_file_exists(filename, directory=False)
@@ -81,7 +81,7 @@ class vagrant(ShutItModule):
 	def get_config(self, shutit):
 		# CONFIGURATION
 		# shutit.get_config(module_id,option,default=None,boolean=False)
-		#                                    - Get configuration value, boolean indicates whether the item is 
+		#                                    - Get configuration value, boolean indicates whether the item is
 		#                                      a boolean type, eg get the config with:
 		# shutit.get_config(self.module_id, 'myconfig', default='a value')
 		#                                      and reference in your code with:
@@ -98,6 +98,22 @@ class vagrant(ShutItModule):
 	
 	def is_installed(self, shutit):
 		return False
+
+
+	#Class-level functions
+	def restore(shutit):
+		if shutit.send_and_match_output('vagrant status',['.*running.*','.*saved.*','.*poweroff.*','.*not created.*','.*aborted.*']):
+			if not shutit.send_and_match_output('vagrant status',['.*running.*','.*not created.*']) and shutit.get_input('A vagrant setup already exists here. Do you want me to start up the existing instance (y) or destroy it (n)?',boolean=True):
+				shutit.send('vagrant up')
+				return True
+			elif not shutit.send_and_match_output('vagrant status',['.*not created.*']):
+				shutit.send('vagrant up')
+				return True
+			elif not shutit.send_and_match_output('vagrant status',['.*running.*']):
+				shutit.send('vagrant destroy -f')
+				return False
+		else:
+			return False
 
 
 def module():
