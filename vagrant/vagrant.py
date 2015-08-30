@@ -111,6 +111,9 @@ class vagrant(ShutItModule):
 				return True
 			elif not shutit.send_and_match_output('vagrant status',['.*running.*']):
 				shutit.send('vagrant destroy -f')
+				shutit.send('vagrant up')
+				return True
+			else:
 				return False
 		else:
 			return False
