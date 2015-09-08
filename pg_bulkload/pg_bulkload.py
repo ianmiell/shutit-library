@@ -103,7 +103,7 @@ class pg_bulkload(ShutItModule):
 
 def module():
 	return pg_bulkload(
-		'shutit.tk.pg_bulkload.pg_bulkload.pg_bulkload', 0.51252324600,
+		'shutit.tk.pg_bulkload.pg_bulkload', 0.51252324600,
 		description='',
 		maintainer='',
 		delivery_methods=['docker'],
