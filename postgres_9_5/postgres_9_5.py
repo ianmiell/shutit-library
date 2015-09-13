@@ -48,7 +48,7 @@ class postgres_9_5(ShutItModule):
 
 def module():
 	return postgres_9_5(
-		'shutit.tk.postgres9_5.postgres_9_5', 0.01251252453,
+		'shutit.tk.postgres_9_5.postgres_9_5', 0.01251252453,
 		description='',
 		maintainer='',
 		delivery_methods=['docker'],
