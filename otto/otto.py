@@ -121,7 +121,7 @@ def module():
 		'shutit.tk.otto.otto.otto', 789610974.00,
 		description='',
 		maintainer='',
-		delivery_methods=['docker'],
+		delivery_methods=['docker','dockerfile'],
 		depends=['shutit.tk.setup']
 	)
 
