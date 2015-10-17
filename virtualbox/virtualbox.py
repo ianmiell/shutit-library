@@ -61,10 +61,8 @@ class virtualbox(ShutItModule):
 		# shutit.set_password(password, user='')
 		#                                    - Set password for a given user on target
 		cfg = shutit.cfg
-		shutit.install('build-essential wget')
-		if not shutit.command_available('sudo'):
-			shutit.install('sudo')
 		if not shutit.command_available('VBoxManage'):
+			shutit.install('build-essential wget')
 			if cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'apt':
 				pw = shutit.get_env_pass('Input your sudo password to install virtualbox')
 				shutit.send('wget http://download.virtualbox.org/virtualbox/4.3.30/virtualbox-4.3_4.3.30-101610~Ubuntu~raring_amd64.deb')
