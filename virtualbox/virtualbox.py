@@ -100,7 +100,7 @@ def module():
 		'shutit-library.virtualbox.virtualbox.virtualbox', 0.8024250902,
 		description='',
 		maintainer='',
-		delivery_methods=[],
+		delivery_methods=['bash'],
 		depends=['shutit.tk.setup']
 	)
 

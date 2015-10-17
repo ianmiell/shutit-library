@@ -4,7 +4,7 @@
 from shutit_module import ShutItModule
 
 
-class vagrant(ShutItModule):
+class chef(ShutItModule):
 
 
 	def build(self, shutit):
@@ -16,8 +16,8 @@ class vagrant(ShutItModule):
 		#                                      by ShutIt with shell prompts.
 		# shutit.multisend(send,send_dict)   - Send a command, dict contains {expect1:response1,expect2:response2,...}
 		# shutit.send_and_get_output(send)   - Returns the output of the sent command
-		# shutit.send_and_match_output(send, matches)
-		#                                    - Returns True if any lines in output match any of
+		# shutit.send_and_match_output(send, matches) 
+		#                                    - Returns True if any lines in output match any of 
 		#                                      the regexp strings in the matches list
 		# shutit.send_until(send,regexps)    - Send command over and over until one of the regexps seen in the output.
 		# shutit.run_script(script)          - Run the passed-in string as a script
@@ -28,7 +28,7 @@ class vagrant(ShutItModule):
 		#                                      Use this if your env (or more specifically, prompt) changes at all,
 		#                                      eg reboot, bash, ssh
 		# shutit.logout(command='exit')      - Clean up from a login.
-		#
+		# 
 		# COMMAND HELPER FUNCTIONS
 		# shutit.add_to_bashrc(line)         - Add a line to bashrc
 		# shutit.get_url(fname, locations)   - Get a file via url from locations specified in a list
@@ -49,7 +49,13 @@ class vagrant(ShutItModule):
 		# shutit.send_host_dir(path, hostfilepath)
 		#                                    - Send directory and contents to path on the target
 		# shutit.insert_text(text, fname, pattern)
-		#                                    - Insert text into file fname after the first occurrence of
+		#                                    - Insert text into file fname after the first occurrence of 
+		#                                      regexp pattern.
+		# shutit.delete_text(text, fname, pattern)
+		#                                    - Delete text from file fname after the first occurrence of
+		#                                      regexp pattern.
+		# shutit.replace_text(text, fname, pattern)
+		#                                    - Replace text from file fname after the first occurrence of
 		#                                      regexp pattern.
 		# ENVIRONMENT QUERYING
 		# shutit.host_file_exists(filename, directory=False)
@@ -60,28 +66,13 @@ class vagrant(ShutItModule):
 		# shutit.package_installed(package)  - Returns True if the package exists on the target
 		# shutit.set_password(password, user='')
 		#                                    - Set password for a given user on target
-		#if not shutit.command_available('vagrant'):
-		#	if shutit.get_input('vagrant apparently not installed. Would you like me to install it for you?',boolean=True):
-		#	    pw = shutit.get_input('Please input your sudo password in case it is needed.',ispass=True)
-		#	    command = shutit.get_input('Please input your install command, eg "apt-get install -y", or "yum install -y"')
-		#	    shutit.multisend('sudo ' + command + ' vagrant',{'assword':pw})
-		cfg=shutit.cfg
-		if not shutit.command_available('vagrant'):
-			if cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'apt':
-				pw = shutit.get_env_pass('Input your sudo password to install virtualbox')
-				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
-				shutit.multisend('sudo dpkg -i /tmp/vagrant.deb',{'assword':pw})
-			elif cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'yum':
-				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.rpm > /tmp/vagrant.deb',note='Downloading vagrant and installing')
-				shutit.send('rpm -i /tmp/vagrant.deb')
-			else:
-				shutit.install('vagrant')
+		shutit.get_url('chef_12.4.1-1_amd64.deb',['https://opscode-omnibus-packages.s3.amazonaws.com/ubuntu/10.04/x86_64'])
 		return True
 
 	def get_config(self, shutit):
 		# CONFIGURATION
 		# shutit.get_config(module_id,option,default=None,boolean=False)
-		#                                    - Get configuration value, boolean indicates whether the item is
+		#                                    - Get configuration value, boolean indicates whether the item is 
 		#                                      a boolean type, eg get the config with:
 		# shutit.get_config(self.module_id, 'myconfig', default='a value')
 		#                                      and reference in your code with:
@@ -100,31 +91,12 @@ class vagrant(ShutItModule):
 		return False
 
 
-	#Class-level functions
-	def restore(shutit):
-		if shutit.send_and_match_output('vagrant status',['.*running.*','.*saved.*','.*poweroff.*','.*not created.*','.*aborted.*']):
-			if not shutit.send_and_match_output('vagrant status',['.*running.*','.*not created.*']) and shutit.get_input('A vagrant setup already exists here. Do you want me to start up the existing instance (y) or destroy it (n)?',boolean=True):
-				shutit.send('vagrant up')
-				return True
-			elif not shutit.send_and_match_output('vagrant status',['.*not created.*']):
-				shutit.send('vagrant up')
-				return True
-			elif not shutit.send_and_match_output('vagrant status',['.*running.*']):
-				shutit.send('vagrant destroy -f')
-				shutit.send('vagrant up')
-				return True
-			else:
-				return False
-		else:
-			return False
-
-
 def module():
-	return vagrant(
-		'tk.shutit.vagrant.vagrant.vagrant', 0.941247152,
+	return chef(
+		'shutit.tk.chef.chef', 0.07842914092,
 		description='',
 		maintainer='',
-		delivery_methods=['bash'],
+		delivery_methods=['docker'],
 		depends=['shutit.tk.setup']
 	)
 
