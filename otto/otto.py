@@ -4,7 +4,7 @@
 from shutit_module import ShutItModule
 
 
-class virtualbox(ShutItModule):
+class otto(ShutItModule):
 
 
 	def build(self, shutit):
@@ -51,6 +51,12 @@ class virtualbox(ShutItModule):
 		# shutit.insert_text(text, fname, pattern)
 		#                                    - Insert text into file fname after the first occurrence of 
 		#                                      regexp pattern.
+		# shutit.delete_text(text, fname, pattern)
+		#                                    - Delete text from file fname after the first occurrence of
+		#                                      regexp pattern.
+		# shutit.replace_text(text, fname, pattern)
+		#                                    - Replace text from file fname after the first occurrence of
+		#                                      regexp pattern.
 		# ENVIRONMENT QUERYING
 		# shutit.host_file_exists(filename, directory=False)
 		#                                    - Returns True if file exists on host
@@ -60,17 +66,29 @@ class virtualbox(ShutItModule):
 		# shutit.package_installed(package)  - Returns True if the package exists on the target
 		# shutit.set_password(password, user='')
 		#                                    - Set password for a given user on target
-		cfg = shutit.cfg
-		if not shutit.command_available('VBoxManage'):
-			shutit.install('build-essential wget')
-			if cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'apt':
-				pw = shutit.get_env_pass('Input your sudo password to install virtualbox')
-				shutit.send('wget http://download.virtualbox.org/virtualbox/4.3.30/virtualbox-4.3_4.3.30-101610~Ubuntu~raring_amd64.deb')
-				shutit.multisend('sudo dpkg -i virtualbox-4.3_4.3.30-101610~Ubuntu~raring_amd64.deb',{'assword':pw},check_exit=False)
-				shutit.multisend('sudo apt-get -f -y install',{'assword':pw})
-				shutit.multisend('sudo dpkg -i virtualbox-4.3_4.3.30-101610~Ubuntu~raring_amd64.deb',{'assword':pw})
-			else:
-				shutit.install('virtualbox')
+		#
+		# USER INTERACTION
+		# shutit.get_input(msg,default,valid[],boolean?,ispass?)
+		#                                    - Get input from user and return output
+		# shutit.fail(msg)                   - Fail the program and exit with status 1
+		# 
+		shutit.install('git')
+		shutit.install('golang')
+		shutit.install('golang-golang-x-tools')
+		shutit.install('build-essential')
+		shutit.install('zip')
+		shutit.install('golang-golang-x-net-dev')
+		shutit.add_to_bashrc('export GOPATH=/usr/share/go')
+		shutit.add_to_bashrc('export PATH=$PATH:/usr/lib/go/bin')
+		shutit.send('export GOPATH=/usr/share/go')
+		shutit.send('export PATH=$PATH:/usr/lib/go/bin')
+		shutit.send('mkdir -p /usr/share/go/bin')
+		shutit.send('mkdir -p /usr/lib/go/src/github.com/hashicorp/')
+		shutit.send('cd /usr/lib/go/src/github.com/hashicorp/')
+		shutit.send('git clone https://github.com/hashicorp/otto.git')
+		shutit.send('cd otto')
+		shutit.send('make updatedeps')
+		shutit.send('make dev')
 		return True
 
 	def get_config(self, shutit):
@@ -96,11 +114,11 @@ class virtualbox(ShutItModule):
 
 
 def module():
-	return virtualbox(
-		'shutit-library.virtualbox.virtualbox.virtualbox', 0.8024250902,
+	return otto(
+		'shutit.tk.otto.otto.otto', 789610974.00,
 		description='',
 		maintainer='',
-		delivery_methods=['bash'],
+		delivery_methods=['docker','dockerfile'],
 		depends=['shutit.tk.setup']
 	)
 
