@@ -60,6 +60,7 @@ class go(ShutItModule):
 		#                                    - Set password for a given user on target
 		shutit.install('build-essential',note='Install essential build tools and git')
 		shutit.install('git')
+		shutit.install('mercurial',note='required for hg command')
 		shutit.send('cd /root',note='''We've installed the essential build tools and git; now check out go source code''')
 		shutit.send('git clone https://go.googlesource.com/go')
 		shutit.send('cd go')
