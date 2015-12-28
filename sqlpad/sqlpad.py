@@ -90,7 +90,7 @@ class sqlpad(ShutItModule):
 		return True
 
 	def stop(self, shutit):
-		shutit.send('''ps -ef | grep -w sqlpad | awk '{print $2}' | xargs kill''')
+		shutit.send('''ps -ef | grep -w sqlpad | awk '{print $2}' | xargs kill''',check_exit=False)
 		return True
 
 	def test(self, shutit):
