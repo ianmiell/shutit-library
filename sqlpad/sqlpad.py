@@ -107,7 +107,7 @@ class sqlpad(ShutItModule):
 
 def module():
 	return sqlpad(
-		'shuttit.tk.sqlpad.sqlpad', 0.131817236,
+		'shutit.tk.sqlpad.sqlpad', 0.131817236,
 		description='',
 		maintainer='',
 		delivery_methods=['docker'],
