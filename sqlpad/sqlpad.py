@@ -86,11 +86,11 @@ class sqlpad(ShutItModule):
 		return True
 
 	def start(self, shutit):
-		shutit.send('sqlpad --port 3000')
+		shutit.send('nohup sqlpad --port 3000 &')
 		return True
 
 	def stop(self, shutit):
-		shutit.send('''ps -ef | grep -w sqlpad | awk '{print $1}' | xargs kill''')
+		shutit.send('''ps -ef | grep -w sqlpad | awk '{print $2}' | xargs kill''')
 		return True
 
 	def test(self, shutit):
