@@ -72,6 +72,7 @@ class sqlpad(ShutItModule):
 		#                                    - Get input from user and return output
 		# shutit.fail(msg)                   - Fail the program and exit with status 1
 		# 
+		shutit.send('mkdir -p /var/lib/sqlpad')
 		shutit.send('npm install sqlpad -g')
 		return True
 
@@ -86,7 +87,7 @@ class sqlpad(ShutItModule):
 		return True
 
 	def start(self, shutit):
-		shutit.send('nohup sqlpad --port 3000 &')
+		shutit.send('nohup sqlpad --port 3000 --dir /var/lib/sqlpad &')
 		return True
 
 	def stop(self, shutit):
