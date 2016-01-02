@@ -103,6 +103,8 @@ class sqlpad(ShutItModule):
 		return True
 	
 	def is_installed(self, shutit):
+		if shutit.send_and_get_output('ls /var/lib/sqlpad | wc -l') == '1':
+			return True
 		return False
 
 
