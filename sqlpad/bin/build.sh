@@ -7,7 +7,7 @@ then
 	exit 1
 fi
 pushd ..
-docker build --no-cache -t sqpad .
+docker build --no-cache -t sqlpad .
 if [[ $? != 0 ]]
 then
 	popd

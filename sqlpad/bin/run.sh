@@ -3,8 +3,8 @@ set -x
 set -e
 # Example for running
 DOCKER=${DOCKER:-docker}
-IMAGE_NAME=sqlpad
-CONTAINER_NAME=$IMAGE_NAME
+IMAGE_NAME=imiell/sqlpad
+CONTAINER_NAME=sqlpad
 DOCKER_ARGS='-p 9010:3000'
 while getopts "i:c:a:" opt
 do

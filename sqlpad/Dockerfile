@@ -12,6 +12,4 @@ RUN git clone https://github.com/ianmiell/shutit-library
 WORKDIR /opt/shutit-library/sqlpad
 RUN shutit build --delivery dockerfile -m ../nodejs
 
-VOLUME /var/land_registry/var/lib/sqlpad:/var/lib/sqlpad
-
 CMD ["sqlpad","--port","3000","--dir","/var/lib/sqlpad"]
