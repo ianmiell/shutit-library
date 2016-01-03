@@ -17,5 +17,8 @@ class nodejs(ShutItModule):
 def module():
 	return nodejs(
 		'shutit.tk.nodejs.nodejs', 0.1212353235,
+        description='',
+        maintainer='',
+        delivery_methods=['docker','dockerfile'],
 		depends=['shutit.tk.setup']
 	)
