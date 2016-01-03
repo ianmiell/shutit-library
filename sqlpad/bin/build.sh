@@ -7,7 +7,7 @@ then
 	exit 1
 fi
 pushd ..
-$SHUTIT build -d docker -m ../nodejs "$@"
+docker build --no-cache -t sqpad .
 if [[ $? != 0 ]]
 then
 	popd

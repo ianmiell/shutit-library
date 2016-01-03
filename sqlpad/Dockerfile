@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y -qq git python-pip
 RUN pip install shutit
 
-EXPOSE 3000
+EXPOSE 9010:3000
 
 WORKDIR /opt
 # Change the next two lines to build your ShutIt module.
