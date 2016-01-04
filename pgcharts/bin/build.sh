@@ -7,7 +7,7 @@ then
 	exit 1
 fi
 pushd ..
-$SHUTIT build -d docker "$@"
+$SHUTIT build -d docker -m ../postgres "$@"
 if [[ $? != 0 ]]
 then
 	popd

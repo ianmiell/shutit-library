@@ -74,6 +74,7 @@ class pgcharts(ShutItModule):
 		# 
 		shutit.install('git')
 		shutit.install('sbcl')
+		shutit.install('curl')
 		shutit.install('build-essential')
 		shutit.send('git clone https://github.com/dimitri/pgcharts.git')
 		shutit.send('cd pgcharts')
