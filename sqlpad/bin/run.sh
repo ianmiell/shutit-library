@@ -1,9 +1,11 @@
 #!/bin/bash
+set -x
+set -e
 # Example for running
 DOCKER=${DOCKER:-docker}
-IMAGE_NAME=sqlpad
-CONTAINER_NAME=$IMAGE_NAME
-DOCKER_ARGS=''
+IMAGE_NAME=imiell/sqlpad
+CONTAINER_NAME=sqlpad
+DOCKER_ARGS='-p 9010:3000'
 while getopts "i:c:a:" opt
 do
 	case "$opt" in
@@ -18,4 +20,5 @@ do
 		;;
 	esac
 done
-${DOCKER} run -d --name ${CONTAINER_NAME} ${DOCKER_ARGS} ${IMAGE_NAME}  /bin/sh -c 'sleep infinity'
+docker rm -f sqlpad || /bin/true
+${DOCKER} run -d --name ${CONTAINER_NAME} ${DOCKER_ARGS} ${IMAGE_NAME}

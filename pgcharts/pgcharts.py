@@ -110,6 +110,6 @@ def module():
 		description='',
 		maintainer='',
 		delivery_methods=['docker','dockerfile'],
-		depends=['shutit.tk.postgres.postgres']
+		depends=['shutit.tk.setup']
 	)
 

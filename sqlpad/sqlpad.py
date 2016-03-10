@@ -87,11 +87,9 @@ class sqlpad(ShutItModule):
 		return True
 
 	def start(self, shutit):
-		shutit.send('nohup sqlpad --port 3000 --dir /var/lib/sqlpad &')
 		return True
 
 	def stop(self, shutit):
-		shutit.send('''ps -ef | grep -w sqlpad | awk '{print $2}' | xargs kill''',check_exit=False)
 		return True
 
 	def test(self, shutit):
@@ -103,8 +101,6 @@ class sqlpad(ShutItModule):
 		return True
 	
 	def is_installed(self, shutit):
-		if shutit.send_and_get_output('ls /var/lib/sqlpad | wc -l') == '1':
-			return True
 		return False
 
 
