@@ -109,7 +109,7 @@ def module():
 		'tk.shutit.ctypes.ctypes', 1845506479.0001,
 		description='call libraries from within bash: http://ctypes.sh/',
 		maintainer='ian.miell@gmail.com',
-		delivery_methods=['docker'],
+		delivery_methods=['docker','dockerfile'],
 		depends=['shutit.tk.setup']
 	)
 
