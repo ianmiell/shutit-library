@@ -72,14 +72,15 @@ class ctypes(ShutItModule):
 		#                                    - Get input from user and return output
 		# shutit.fail(msg)                   - Fail the program and exit with status 1
 		#
-		shutit.install('git build-essential autoconf libtool libffi-dev')
+		shutit.install('git build-essential autoconf libtool libffi-dev pkg-config')
 		shutit.send('git clone https://github.com/taviso/ctypes.sh.git')
 		shutit.send('cd ctypes.sh')
 		shutit.send('./autogen.sh')
-		shutit.send('''sed -i 's/PKG_CHECK_MODULES(FFI, libffi >= 3)//' configure''')
 		shutit.send('./configure')
 		shutit.send('make')
 		shutit.send('make install')
+		shutit.send('source /usr/local/bin/ctypes.sh')
+		shutit.add_to_bashrc('source /usr/local/bin/ctypes.sh')
 		return True
 
 	def get_config(self, shutit):
