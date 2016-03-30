@@ -15,7 +15,7 @@ class otto_bash(ShutItModule):
 
 def module():
 	return otto_bash(
-		'tk.shutit.otto_bash.otto_bash', 1845506479.0001,
+		'tk.shutit.otto_bash.otto_bash', 1845506479.00012136247,
 		description='',
 		maintainer='ian.miell@gmail.com',
 		delivery_methods=['bash'],
