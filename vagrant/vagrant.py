@@ -66,14 +66,21 @@ class vagrant(ShutItModule):
 		#	    command = shutit.get_input('Please input your install command, eg "apt-get install -y", or "yum install -y"')
 		#	    shutit.multisend('sudo ' + command + ' vagrant',{'assword':pw})
 		cfg=shutit.cfg
+		vagrant_version = '1.8.1'
+		processor = shutit.send_and_get_output('uname -p')
+		if not shutit.command_available('wget'):
+			shutit.install('wget')
 		if not shutit.command_available('vagrant'):
 			if cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'apt':
-				pw = shutit.get_env_pass('Input your sudo password to install virtualbox')
-				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
+				pw = shutit.get_env_pass('Input your sudo password to install vagrant')
+				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_' + vagrant_version + '_' + processor + 'x86_64.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
 				shutit.multisend('sudo dpkg -i /tmp/vagrant.deb',{'assword':pw})
+				shutit.send('rm -f /tmp/vagrant.deb')
 			elif cfg['environment'][cfg['build']['current_environment_id']]['install_type'] == 'yum':
-				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.rpm > /tmp/vagrant.deb',note='Downloading vagrant and installing')
-				shutit.send('rpm -i /tmp/vagrant.deb')
+				pw = shutit.get_env_pass('Input your sudo password to install vagrant')
+				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_' + vagrant_version + '_' + processor + '.rpm > /tmp/vagrant.rpm',note='Downloading vagrant and installing')
+				shutit.multisend('sudo rpm -i /tmp/vagrant.rpm',{'assword':pw})
+				shutit.send('rm -f /tmp/vagrant.rpm')
 			else:
 				shutit.install('vagrant')
 		return True
