@@ -73,7 +73,7 @@ class vagrant(ShutItModule):
 		if not shutit.command_available('vagrant'):
 			if shutit.get_current_shutit_pexpect_session_environment().install_type == 'apt':
 				pw = shutit.get_env_pass('Input your sudo password to install vagrant')
-				shutit.send('wget -qO- https://dl.bintray.com/mitchellh/vagrant/vagrant_' + vagrant_version + '_' + processor + 'x86_64.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
+				shutit.send('wget -qO- https://releases.hashicorp.com/vagrant/vagrant_' + vagrant_version + '_' + processor + '.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
 				shutit.multisend('sudo dpkg -i /tmp/vagrant.deb',{'assword':pw})
 				shutit.send('rm -f /tmp/vagrant.deb')
 			elif shutit.get_current_shutit_pexpect_session_environment().install_type == 'yum':
