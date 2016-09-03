@@ -22,7 +22,6 @@ push:no
 save:no
 export:no
 #server:REMOVE_ME_FOR_DOCKER_INDEX
-name:digital_ocean
 # tag suffix, defaults to "latest", eg registry/username/repository:latest.
 # empty is also "latest"
 tag_name:latest
