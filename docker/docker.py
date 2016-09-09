@@ -3,44 +3,16 @@ from shutit_module import ShutItModule
 class docker(ShutItModule):
 
 	def build(self, shutit):
-		#shutit.install('lsb-release')
-		#shutit.send('echo deb http://archive.ubuntu.com/ubuntu $(lsb_release -s -c) universe > /etc/apt/sources.list.d/universe.list')
-		#shutit.send('apt-get update -qq')
-		shutit.install('iptables')
-		shutit.install('ca-certificates')
-		shutit.install('lxc')
-		shutit.install('curl')
-		shutit.install('aufs-tools')
-		shutit.install('psmisc') # for killall
-		shutit.send('cd /usr/bin')
-		# Sensible to pick a relatively old one to avoid client mismatch errors
-		shutit.send('curl https://get.docker.io/builds/Linux/x86_64/docker-1.0.1 > docker')
-		shutit.send('chmod +x docker')
-		shutit.send_host_file('/usr/bin/wrapdocker','context/wrapdocker')
-		shutit.send('chmod +x /usr/bin/wrapdocker')
-		start_docker = """cat > /root/start_docker.sh << 'END'
-#!/bin/bash
-/usr/bin/wrapdocker &
-echo "Docker daemon running"
-END"""
-		shutit.send(start_docker)
-		shutit.send('chmod +x /root/start_docker.sh')
-		shutit.send('ln -s /usr/bin/docker /usr/bin/docker.io')
+		if shutit.get_current_environment()['distro'] == 'ubuntu':
+			shutit.send('apt-get update')
+			shutit.send('apt-get install apt-transport-https ca-certificates')
+			shutit.send('apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070A')
+		shutit.send('cat > /etc/apt/sources.list.d/docker.list << END
+deb https://apt.dockerproject.org/repo ubuntu-$(lsb-release -c -s) main
+END')
+		else:
+			shutit.install('docker.io')
 		return True
-
-	def check_ready(self, shutit):
-		"""Only apt-based systems are supported support atm.
-		"""
-		return shutit.get_current_environment()['install_type'] == 'apt'
-
-	def start(self, shutit):
-		shutit.send('/root/start_docker.sh')
-		return True
-
-	def stop(self, shutit):
-		shutit.send('/usr/bin/killall docker',check_exit=False) # could return 1 if none exist
-		return True
-		
 
 
 def module():
