@@ -7,9 +7,9 @@ class docker(ShutItModule):
 			shutit.send('apt-get update')
 			shutit.send('apt-get install apt-transport-https ca-certificates')
 			shutit.send('apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070A')
-		shutit.send('cat > /etc/apt/sources.list.d/docker.list << END
+			shutit.send('''cat > /etc/apt/sources.list.d/docker.list << END
 deb https://apt.dockerproject.org/repo ubuntu-$(lsb-release -c -s) main
-END')
+END''')
 		else:
 			shutit.install('docker.io')
 		return True
