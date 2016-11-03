@@ -84,7 +84,7 @@ class vagrant(ShutItModule):
 			else:
 				shutit.install('vagrant')
 		else:
-			if send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
+			if shutit.send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
 				shutit.log('Vagrant version may be too low!')
 		return True
 
