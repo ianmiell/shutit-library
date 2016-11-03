@@ -66,7 +66,7 @@ class vagrant(ShutItModule):
 		#	    command = shutit.get_input('Please input your install command, eg "apt-get install -y", or "yum install -y"')
 		#	    shutit.multisend('sudo ' + command + ' vagrant',{'assword':pw})
 		cfg=shutit.cfg
-		vagrant_version = '1.8.1'
+		vagrant_version = '1.8.6'
 		processor = shutit.send_and_get_output('uname -p')
 		if not shutit.command_available('wget'):
 			shutit.install('wget')
@@ -83,6 +83,9 @@ class vagrant(ShutItModule):
 				shutit.send('rm -f /tmp/vagrant.rpm')
 			else:
 				shutit.install('vagrant')
+		else:
+			if send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
+				shutit.log('Vagrant version may be too low!')
 		return True
 
 	def get_config(self, shutit):
