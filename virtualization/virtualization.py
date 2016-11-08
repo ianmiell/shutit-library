@@ -15,7 +15,8 @@ class virtualization(ShutItModule):
 				else:
 					shutit.install('virtualbox')
 		elif virt_method == 'libvirt':
-			
+			shutit.install('kvm')
+			shutit.install('libvirt')
 		else:
 			shutit.fail(self.module_id + ' requires virt_method to be set correctly (virtualbox or libvirt)')
 		return True
