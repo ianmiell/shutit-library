@@ -86,6 +86,7 @@ class vagrant(ShutItModule):
 		else:
 			if shutit.send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
 				shutit.log('Vagrant version may be too low!')
+				shutit.send('echo VAGRANT VERSION MAY BE TOO LOW SEE https://github.com/ianmiell/shutit-library/issues/1 && sleep 10')
 		return True
 
 	def get_config(self, shutit):
