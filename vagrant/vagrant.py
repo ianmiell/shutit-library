@@ -35,6 +35,7 @@ class vagrant(ShutItModule):
 				shutit.install('gcc')
 				shutit.install('libvirt')
 				shutit.install('libvirt-devel')
+				shutit.install('qemu-kvm')
 				shutit.send('vagrant plugin install vagrant-libvirt')
 		except:
 			pass
