@@ -15,15 +15,18 @@ class virtualization(ShutItModule):
 				else:
 					shutit.install('virtualbox')
 		elif virt_method == 'libvirt':
-			shutit.install('kvm')
-			shutit.install('libvirt')
+			if not shutit.command_available('libvirt'):
+				shutit.install('kvm')
+				shutit.install('libvirt')
+				shutit.install('libvirt-devel')
+				shutit.send('systemctl start libvirtd')
 		else:
 			shutit.fail(self.module_id + ' requires virt_method to be set correctly (virtualbox or libvirt)')
 		return True
 
                                                                                                    
 	def get_config(self, shutit):                                                                                                             
-		shutit.get_config(self.module_id,'virt_method',default='virtualbox')                                                                  
+		shutit.get_config(self.module_id,'virt_method',default='virtualbox')
 		return True                      
 
 def module():
