@@ -36,6 +36,12 @@ class vagrant(ShutItModule):
 				shutit.install('libvirt')
 				shutit.install('libvirt-devel')
 				shutit.install('qemu-kvm')
+				shutit.send('export PATH=$PATH:/opt/vagrant/embedded/bin/')
+				shutit.send('gem source -r https://rubygems.org/')
+				shutit.multisend('gem source -a http://rubygems.org/', {'Do you want to add this insecure source?':'y'})
+				shutit.send('gem update --system --no-doc')
+				shutit.send('gem source -r http://rubygems.org/')
+				shutit.send('gem source -a https://rubygems.org/')
 				shutit.send('vagrant plugin install vagrant-libvirt')
 		except:
 			pass
