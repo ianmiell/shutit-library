@@ -31,7 +31,7 @@ class vagrant(ShutItModule):
 				shutit.log('Vagrant version may be too low!')
 				shutit.send('echo VAGRANT VERSION MAY BE TOO LOW SEE https://github.com/ianmiell/shutit-library/issues/1 && sleep 10')
 		try:
-			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
+			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt' and not shutit.command_available('virsh'):
 				shutit.install('gcc')
 				shutit.install('gcc-c++')
 				shutit.install('libvirt')
