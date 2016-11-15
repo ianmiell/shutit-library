@@ -15,10 +15,12 @@ class virtualization(ShutItModule):
 				else:
 					shutit.install('virtualbox')
 		elif virt_method == 'libvirt':
-			if not shutit.command_available('libvirt'):
+			# Is this a good enough test of whether virsh exists?
+			if not shutit.command_available('virsh'):
 				shutit.install('kvm')
 				shutit.install('libvirt')
 				shutit.install('libvirt-devel')
+				shutit.install('qemu-kvm')
 				shutit.send('systemctl start libvirtd')
 		else:
 			shutit.fail(self.module_id + ' requires virt_method to be set correctly (virtualbox or libvirt)')
