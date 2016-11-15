@@ -33,6 +33,7 @@ class vagrant(ShutItModule):
 		try:
 			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
 				shutit.install('gcc')
+				shutit.install('gcc-c++')
 				shutit.install('libvirt')
 				shutit.install('libvirt-devel')
 				shutit.install('qemu-kvm')
