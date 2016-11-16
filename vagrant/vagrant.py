@@ -14,6 +14,22 @@ class vagrant(ShutItModule):
 		if not shutit.command_available('wget'):
 			shutit.install('wget')
 		if not shutit.command_available('vagrant'):
+			try:
+				if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
+					shutit.install('gcc')
+					shutit.install('gcc-c++')
+					shutit.install('libvirt')
+					shutit.install('libvirt-devel')
+					shutit.install('qemu-kvm')
+					shutit.send('export PATH=$PATH:/opt/vagrant/embedded/bin/')
+					shutit.send('gem source -r https://rubygems.org/')
+					shutit.multisend('gem source -a http://rubygems.org/', {'Do you want to add this insecure source?':'y'})
+					shutit.send('gem update --system --no-doc')
+					shutit.send('gem source -r http://rubygems.org/')
+					shutit.send('gem source -a https://rubygems.org/')
+					shutit.send('vagrant plugin install vagrant-libvirt')
+			except:
+				pass
 			if shutit.get_current_shutit_pexpect_session_environment().install_type == 'apt':
 				pw = shutit.get_env_pass('Input your sudo password to install vagrant')
 				shutit.send('wget -qO- https://releases.hashicorp.com/vagrant/' + vagrant_version + '/vagrant_' + vagrant_version + '_' + processor + '.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
@@ -31,7 +47,8 @@ class vagrant(ShutItModule):
 				shutit.log('Vagrant version may be too low!')
 				shutit.send('echo VAGRANT VERSION MAY BE TOO LOW SEE https://github.com/ianmiell/shutit-library/issues/1 && sleep 10')
 		try:
-			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt' and not shutit.command_available('virsh'):
+			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
+				# TODO: when are we happy that this doesn't need to be done?
 				shutit.install('gcc')
 				shutit.install('gcc-c++')
 				shutit.install('libvirt')
@@ -43,9 +60,8 @@ class vagrant(ShutItModule):
 				shutit.send('gem update --system --no-doc')
 				shutit.send('gem source -r http://rubygems.org/')
 				shutit.send('gem source -a https://rubygems.org/')
-				shutit.send('vagrant plugin install vagrant-libvirt')
-		except:
-			pass
+			except:
+				pass
 		return True
 
 	def get_config(self, shutit):
