@@ -42,6 +42,8 @@ class vagrant(ShutItModule):
 					shutit.send('vagrant plugin install vagrant-libvirt')
 			except:
 				pass
+		if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
+			shutit.send('systemctl start libvirtd')
 		else:
 			if shutit.send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
 				shutit.log('Vagrant version may be too low!')
