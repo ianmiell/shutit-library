@@ -60,8 +60,8 @@ class vagrant(ShutItModule):
 				shutit.send('gem update --system --no-doc')
 				shutit.send('gem source -r http://rubygems.org/')
 				shutit.send('gem source -a https://rubygems.org/')
-			except:
-				pass
+		except:
+			pass
 		return True
 
 	def get_config(self, shutit):
