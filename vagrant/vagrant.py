@@ -14,6 +14,18 @@ class vagrant(ShutItModule):
 		if not shutit.command_available('wget'):
 			shutit.install('wget')
 		if not shutit.command_available('vagrant'):
+			if shutit.get_current_shutit_pexpect_session_environment().install_type == 'apt':
+				pw = shutit.get_env_pass('Input your sudo password to install vagrant')
+				shutit.send('wget -qO- https://releases.hashicorp.com/vagrant/' + vagrant_version + '/vagrant_' + vagrant_version + '_' + processor + '.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
+				shutit.multisend('sudo dpkg -i /tmp/vagrant.deb',{'assword':pw})
+				shutit.send('rm -f /tmp/vagrant.deb')
+			elif shutit.get_current_shutit_pexpect_session_environment().install_type == 'yum':
+				pw = shutit.get_env_pass('Input your sudo password to install vagrant')
+				shutit.send('wget -qO- https://releases.hashicorp.com/vagrant/' + vagrant_version + '/vagrant_' + vagrant_version + '_' + processor + '.rpm > /tmp/vagrant.rpm',note='Downloading vagrant and installing')
+				shutit.multisend('sudo rpm -i /tmp/vagrant.rpm',{'assword':pw})
+				shutit.send('rm -f /tmp/vagrant.rpm')
+			else:
+				shutit.install('vagrant')
 			try:
 				if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
 					shutit.install('gcc')
@@ -30,38 +42,10 @@ class vagrant(ShutItModule):
 					shutit.send('vagrant plugin install vagrant-libvirt')
 			except:
 				pass
-			if shutit.get_current_shutit_pexpect_session_environment().install_type == 'apt':
-				pw = shutit.get_env_pass('Input your sudo password to install vagrant')
-				shutit.send('wget -qO- https://releases.hashicorp.com/vagrant/' + vagrant_version + '/vagrant_' + vagrant_version + '_' + processor + '.deb > /tmp/vagrant.deb',note='Downloading vagrant and installing')
-				shutit.multisend('sudo dpkg -i /tmp/vagrant.deb',{'assword':pw})
-				shutit.send('rm -f /tmp/vagrant.deb')
-			elif shutit.get_current_shutit_pexpect_session_environment().install_type == 'yum':
-				pw = shutit.get_env_pass('Input your sudo password to install vagrant')
-				shutit.send('wget -qO- https://releases.hashicorp.com/vagrant/' + vagrant_version + '/vagrant_' + vagrant_version + '_' + processor + '.rpm > /tmp/vagrant.rpm',note='Downloading vagrant and installing')
-				shutit.multisend('sudo rpm -i /tmp/vagrant.rpm',{'assword':pw})
-				shutit.send('rm -f /tmp/vagrant.rpm')
-			else:
-				shutit.install('vagrant')
 		else:
 			if shutit.send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
 				shutit.log('Vagrant version may be too low!')
 				shutit.send('echo VAGRANT VERSION MAY BE TOO LOW SEE https://github.com/ianmiell/shutit-library/issues/1 && sleep 10')
-		try:
-			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
-				# TODO: when are we happy that this doesn't need to be done?
-				shutit.install('gcc')
-				shutit.install('gcc-c++')
-				shutit.install('libvirt')
-				shutit.install('libvirt-devel')
-				shutit.install('qemu-kvm')
-				shutit.send('export PATH=$PATH:/opt/vagrant/embedded/bin/')
-				shutit.send('gem source -r https://rubygems.org/')
-				shutit.multisend('gem source -a http://rubygems.org/', {'Do you want to add this insecure source?':'y'})
-				shutit.send('gem update --system --no-doc')
-				shutit.send('gem source -r http://rubygems.org/')
-				shutit.send('gem source -a https://rubygems.org/')
-		except:
-			pass
 		return True
 
 	def get_config(self, shutit):
