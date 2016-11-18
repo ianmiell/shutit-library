@@ -26,10 +26,12 @@ class vagrant(ShutItModule):
 				shutit.send('rm -f /tmp/vagrant.rpm')
 			else:
 				shutit.install('vagrant')
+		# do not move this:
 		try:
 			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
+				if shutit.get_current_shutit_pexpect_session_environment().install_type == 'yum':
+					shutit.install('gcc-c++')
 				shutit.install('gcc')
-				shutit.install('gcc-c++')
 				shutit.install('libvirt')
 				shutit.install('libvirt-devel')
 				shutit.install('qemu-kvm')
@@ -38,7 +40,7 @@ class vagrant(ShutItModule):
 				shutit.send('/opt/vagrant/embedded/bin/gem update --system --no-doc')
 				shutit.send('/opt/vagrant/embedded/bin/gem source -r http://rubygems.org/')
 				shutit.send('/opt/vagrant/embedded/bin/gem source -a https://rubygems.org/')
-				shutit.send('vagrant plugin install vagrant-libvirt')
+				shutit.send('sudo vagrant plugin install vagrant-libvirt')
 		except:
 			pass
 		if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
