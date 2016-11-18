@@ -43,6 +43,9 @@ class vagrant(ShutItModule):
 					shutit.multisend('sudo /opt/vagrant/embedded/bin/gem source -r http://rubygems.org/',{'assword':pw})
 					shutit.multisend('sudo /opt/vagrant/embedded/bin/gem source -a https://rubygems.org/',{'assword':pw})
 					shutit.multisend('sudo vagrant plugin install vagrant-libvirt',{'assword':pw})
+					# https://github.com/vagrant-libvirt/vagrant-libvirt/issues/568
+					shutit.multisend('sudo /opt/vagrant/embedded/bin/gem uninstall -i ~/.vagrant.d/gems --version 0.0.4 fog-libvirt',{'assword':pwd})
+					shutit.multisend('vagrant plugin install fog-libvirt --plugin-version 0.0.3',{'assword':pwd})
 		except:
 			pass
 		if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
