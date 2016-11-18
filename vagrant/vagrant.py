@@ -29,7 +29,7 @@ class vagrant(ShutItModule):
 		# do not move this!
 		# Need the try in case the virtualization item is not set
 		try:
-			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt' and shutit.send_and_get_output('vagrant plugin list | grep vagrant-libvirt') != '':
+			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt' and shutit.send_and_get_output('vagrant plugin list | grep vagrant-libvirt') == '':
 					if shutit.get_current_shutit_pexpect_session_environment().install_type == 'yum':
 						shutit.install('gcc-c++')
 					shutit.install('gcc')
@@ -45,7 +45,7 @@ class vagrant(ShutItModule):
 		except:
 			pass
 		if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
-			shutit.send('systemctl start libvirtd')
+			shutit.send('sudo systemctl start libvirtd')
 		else:
 			if shutit.send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
 				shutit.log('Vagrant version may be too low!')
