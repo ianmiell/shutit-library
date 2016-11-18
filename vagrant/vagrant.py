@@ -26,19 +26,22 @@ class vagrant(ShutItModule):
 				shutit.send('rm -f /tmp/vagrant.rpm')
 			else:
 				shutit.install('vagrant')
+		# do not move this!
+		# Need the try in case the virtualization item is not set
 		try:
-			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
-				shutit.install('gcc')
-				shutit.install('gcc-c++')
-				shutit.install('libvirt')
-				shutit.install('libvirt-devel')
-				shutit.install('qemu-kvm')
-				shutit.send('sudo /opt/vagrant/embedded/bin/gem source -r https://rubygems.org/')
-				shutit.multisend('sudo /opt/vagrant/embedded/bin/gem source -a http://rubygems.org/', {'Do you want to add this insecure source?':'y'})
-				shutit.send('sudo /opt/vagrant/embedded/bin/gem update --system --no-doc')
-				shutit.send('sudo /opt/vagrant/embedded/bin/gem source -r http://rubygems.org/')
-				shutit.send('sudo /opt/vagrant/embedded/bin/gem source -a https://rubygems.org/')
-				shutit.send('vagrant plugin install vagrant-libvirt')
+			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt' and shutit.send_and_get_output('vagrant plugin list | grep vagrant-libvirt') != '':
+					if shutit.get_current_shutit_pexpect_session_environment().install_type == 'yum':
+						shutit.install('gcc-c++')
+					shutit.install('gcc')
+					shutit.install('libvirt')
+					shutit.install('libvirt-devel')
+					shutit.install('qemu-kvm')
+					shutit.send('sudo /opt/vagrant/embedded/bin/gem source -r https://rubygems.org/')
+					shutit.multisend('sudo /opt/vagrant/embedded/bin/gem source -a http://rubygems.org/', {'Do you want to add this insecure source?':'y'})
+					shutit.send('sudo /opt/vagrant/embedded/bin/gem update --system --no-doc')
+					shutit.send('sudo /opt/vagrant/embedded/bin/gem source -r http://rubygems.org/')
+					shutit.send('sudo /opt/vagrant/embedded/bin/gem source -a https://rubygems.org/')
+					shutit.send('sudo vagrant plugin install vagrant-libvirt')
 		except:
 			pass
 		if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
