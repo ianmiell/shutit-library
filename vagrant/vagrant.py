@@ -40,8 +40,8 @@ class vagrant(ShutItModule):
 				shutit.send('gem source -r http://rubygems.org/')
 				shutit.send('gem source -a https://rubygems.org/')
 				shutit.send('vagrant plugin install vagrant-libvirt')
-			except:
-				pass
+		except:
+			pass
 		if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
 			shutit.send('systemctl start libvirtd')
 		else:
