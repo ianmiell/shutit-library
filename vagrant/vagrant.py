@@ -47,15 +47,15 @@ class vagrant(ShutItModule):
 					if shutit.send_and_get_output('vagrant plugin list | grep fog | grep 0.0.4 | wc -l') == '1':
 						shutit.multisend('sudo /opt/vagrant/embedded/bin/gem uninstall -i ~/.vagrant.d/gems --version 0.0.4 fog-libvirt',{'assword':pwd})
 						shutit.multisend('vagrant plugin install fog-libvirt --plugin-version 0.0.3',{'assword':pwd})
+			if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
+				pw = shutit.get_env_pass()
+				shutit.multisend('sudo systemctl start libvirtd',{'assword':pw})
+			else:
+				if shutit.send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
+					shutit.log('Vagrant version may be too low!')
+					shutit.send('echo VAGRANT VERSION MAY BE TOO LOW SEE https://github.com/ianmiell/shutit-library/issues/1 && sleep 10')
 		except:
 			pass
-		if shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'] == 'libvirt':
-			pw = shutit.get_env_pass()
-			shutit.multisend('sudo systemctl start libvirtd',{'assword':pw})
-		else:
-			if shutit.send_and_get_output("""vagrant version  | head -1 | awk '{print $3}'""") < '1.8.6':
-				shutit.log('Vagrant version may be too low!')
-				shutit.send('echo VAGRANT VERSION MAY BE TOO LOW SEE https://github.com/ianmiell/shutit-library/issues/1 && sleep 10')
 		return True
 
 	def get_config(self, shutit):
