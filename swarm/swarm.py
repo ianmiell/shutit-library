@@ -51,15 +51,23 @@ end''')
 		for machine in machines:
 			shutit.login(command='vagrant ssh ' + machine[0])
 			shutit.login(command='sudo su -',password='vagrant')
-			shutit.install('docker')
+			#shutit.install('docker')
+			ip = '172.28.128.9'
+			root_password = 'root'
+			shutit.multisend('passwd',{'assword:':root_password})
+			shutit.send('''sed -i 's/.*PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config''')
+			shutit.send('systemctl restart sshd')
+			shutit.multisend('ssh-keygen',{'Enter':''})
+			shutit.multisend('ssh-copy-id root@' + swarm1_ip,{'assword:':root_password,'ontinue conn':'yes'})
 			shutit.send('curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && chmod +x /usr/local/bin/docker-machine')
-			shutit.pause_point('machine installed on first')
+			shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm1_ip + ' swarm1')
+			shutit.pause_point('machine installed on first?')
 			shutit.logout()
 			shutit.logout()
 		return True
 
 	def get_config(self, shutit):
-		shutit.get_config(self.module_id,'vagrant_image',default='ubuntu/trusty64')
+		shutit.get_config(self.module_id,'vagrant_image',default='ubuntu/xenial64')
 		shutit.get_config(self.module_id,'vagrant_provider',default='virtualbox')
 		shutit.get_config(self.module_id,'gui',default='false')
 		shutit.get_config(self.module_id,'memory',default='1024')
