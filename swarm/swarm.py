@@ -59,11 +59,17 @@ end''')
 			shutit.send('systemctl restart sshd')
 			shutit.multisend('ssh-keygen',{'Enter':''})
 			shutit.multisend('ssh-copy-id root@' + swarm1_ip,{'assword:':root_password,'ontinue conn':'yes'})
-			shutit.send('curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && chmod +x /usr/local/bin/docker-machine')
-			shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm1_ip + ' swarm1')
-			shutit.pause_point('machine installed on first?')
 			shutit.logout()
 			shutit.logout()
+		
+		shutit.login(command='vagrant ssh ' + machine[0])
+		shutit.login(command='sudo su -',password='vagrant')
+		shutit.send('curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && chmod +x /usr/local/bin/docker-machine')
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm1_ip + ' swarm1')
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm2_ip + ' swarm2')
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm3_ip + ' swarm3')
+		shutit.logout()
+		shutit.logout()
 		return True
 
 	def get_config(self, shutit):
