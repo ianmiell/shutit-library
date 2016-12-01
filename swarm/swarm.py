@@ -77,27 +77,6 @@ end''')
 		shutit.get_config(self.module_id,'vagrant_provider',default='virtualbox')
 		shutit.get_config(self.module_id,'gui',default='false')
 		shutit.get_config(self.module_id,'memory',default='1024')
-
-		return True
-
-	def test(self, shutit):
-
-		return True
-
-	def finalize(self, shutit):
-
-		return True
-
-	def isinstalled(self, shutit):
-
-		return False
-
-	def start(self, shutit):
-
-		return True
-
-	def stop(self, shutit):
-
 		return True
 
 def module():
