@@ -108,5 +108,5 @@ def module():
 		description='',
 		maintainer='',
 		delivery_methods=['bash'],
-		depends=['shutit.tk.setup','shutit-library.virtualbox.virtualbox.virtualbox','tk.shutit.vagrant.vagrant.vagrant']
+		depends=['shutit.tk.setup','shutit-library.virtualbox.virtualization.virtualization','tk.shutit.vagrant.vagrant.vagrant']
 	)
