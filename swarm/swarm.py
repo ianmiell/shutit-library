@@ -7,7 +7,6 @@ from shutit_module import ShutItModule
 
 class swarm(ShutItModule):
 
-
 	def build(self, shutit):
 		vagrant_image = shutit.cfg[self.module_id]['vagrant_image']
 		vagrant_provider = shutit.cfg[self.module_id]['vagrant_provider']
@@ -88,9 +87,9 @@ end''')
 		shutit.send('curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && chmod +x /usr/local/bin/docker-machine')
 		token = shutit.send_and_get_output('docker run swarm create 2>&1 | tail -1')
 		shutit.pause_point(token)
-		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm1_ip + ' swarm1 --swarm --swarm-master --swarm-discovery token://' + token)
-		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm2_ip + ' swarm2 --swarm --swarm-master --swarm-discovery token://' + token)
-		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm3_ip + ' swarm3 --swarm --swarm-master --swarm-discovery token://' + token)
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm1_ip + ' --swarm --swarm-master --swarm-discovery token://' + token + ' swarm1')
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm2_ip + ' --swarm --swarm-discovery token://' + token + ' swarm2')
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm3_ip + ' --swarm --swarm-discovery token://' + token + ' swarm3')
 
 		shutit.pause_point(token)
 		shutit.logout()
