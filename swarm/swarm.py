@@ -21,6 +21,7 @@ class swarm(ShutItModule):
 		shutit.send('vagrant init ' + vagrant_image)
 		shutit.send_file(run_dir + '/' + module_name + '/Vagrantfile','''Vagrant.configure("2") do |config|
   config.landrush.enabled = true
+  config.landrush.upstream '8.8.8.8'
   config.vm.provider "virtualbox" do |vb|
     vb.gui = ''' + gui + '''
     vb.memory = "''' + memory + '''"
@@ -51,29 +52,53 @@ end''')
 		for machine in machines:
 			shutit.login(command='vagrant ssh ' + machine[0])
 			shutit.login(command='sudo su -',password='vagrant')
-			#shutit.install('docker')
-			ip = '172.28.128.9'
 			root_password = 'root'
+			shutit.install('net-tools') # netstat needed
+			shutit.install('bind-utils') # host needed
+			# Workaround for docker networking issues + landrush.
+			shutit.send('''echo "$(host -t A index.docker.io | grep has.address | head -1 | awk '{print $NF}') index.docker.io" >> /etc/hosts''')
+			shutit.send('''echo "$(host -t A registry-1.docker.io | grep has.address | head -1 | awk '{print $NF}') registry-1.docker.io" >> /etc/hosts''')
 			shutit.multisend('passwd',{'assword:':root_password})
 			shutit.send('''sed -i 's/.*PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config''')
+			shutit.send('''sed -i 's/.*PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config''')
 			shutit.send('systemctl restart sshd')
 			shutit.multisend('ssh-keygen',{'Enter':''})
+			shutit.logout()
+			shutit.logout()
+
+		for machine in machines:
+			shutit.login(command='vagrant ssh ' + machine[0])
+			shutit.login(command='sudo su -',password='vagrant')
+			for ssh_copy_to in machines:
+				shutit.multisend('ssh-copy-id root@' + ssh_copy_to[0],{'assword:':root_password,'ontinue conn':'yes'})
+				shutit.multisend('ssh-copy-id root@' + ssh_copy_to[1],{'assword:':root_password,'ontinue conn':'yes'})
 			shutit.multisend('ssh-copy-id root@' + swarm1_ip,{'assword:':root_password,'ontinue conn':'yes'})
+			shutit.multisend('ssh-copy-id root@' + swarm2_ip,{'assword:':root_password,'ontinue conn':'yes'})
+			shutit.multisend('ssh-copy-id root@' + swarm3_ip,{'assword:':root_password,'ontinue conn':'yes'})
 			shutit.logout()
 			shutit.logout()
 		
-		shutit.login(command='vagrant ssh ' + machine[0])
+		shutit.login(command='vagrant ssh swarm1')
 		shutit.login(command='sudo su -',password='vagrant')
+		shutit.install('docker')
+		# Workaround required for dns/landrush/docker issues: https://github.com/docker/docker/issues/18842
+		shutit.insert_text('Environment=GODEBUG=netdns=cgo','/usr/lib/systemd/system/docker.service',pattern='Environment=.*')
+		shutit.send('systemctl daemon-reload')
+		shutit.send('systemctl restart docker')
 		shutit.send('curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && chmod +x /usr/local/bin/docker-machine')
-		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm1_ip + ' swarm1')
-		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm2_ip + ' swarm2')
-		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm3_ip + ' swarm3')
+		token = shutit.send_and_get_output('docker run swarm create 2>&1 | tail -1')
+		shutit.pause_point(token)
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm1_ip + ' swarm1 --swarm --swarm-master --swarm-discovery token://' + token)
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm2_ip + ' swarm2 --swarm --swarm-master --swarm-discovery token://' + token)
+		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm3_ip + ' swarm3 --swarm --swarm-master --swarm-discovery token://' + token)
+
+		shutit.pause_point(token)
 		shutit.logout()
 		shutit.logout()
 		return True
 
 	def get_config(self, shutit):
-		shutit.get_config(self.module_id,'vagrant_image',default='ubuntu/xenial64')
+		shutit.get_config(self.module_id,'vagrant_image',default='centos/7')
 		shutit.get_config(self.module_id,'vagrant_provider',default='virtualbox')
 		shutit.get_config(self.module_id,'gui',default='false')
 		shutit.get_config(self.module_id,'memory',default='1024')
