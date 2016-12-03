@@ -99,7 +99,7 @@ end''')
 		shutit.get_config(self.module_id,'vagrant_provider',default='virtualbox')
 		shutit.get_config(self.module_id,'gui',default='false')
 		shutit.get_config(self.module_id,'memory',default='1024')
-		shutit.get_config(self.module_id,'vagrant_run_dir',default=None)
+		shutit.get_config(self.module_id,'vagrant_run_dir',default='/tmp')
 		return True
 
 def module():
