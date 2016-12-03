@@ -45,8 +45,6 @@ end''')
 			shutit.multisend('vagrant up --provider ' + shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'],{'assword for':pw},timeout=99999)
 		except:
 			shutit.multisend('vagrant up',{'assword for':pw},timeout=99999)
-		shutit.begin_asciinema_session(title='Funker demo')
-		shutit.pause_point('')
 		swarm1_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm1.vagrant.test | awk '{print $2}' ''')
 		swarm2_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm2.vagrant.test | awk '{print $2}' ''')
 		swarm3_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm3.vagrant.test | awk '{print $2}' ''')
