@@ -13,8 +13,8 @@ class swarm(ShutItModule):
 		gui = shutit.cfg[self.module_id]['gui']
 		memory = shutit.cfg[self.module_id]['memory']
 		run_dir = os.path.dirname(os.path.abspath(inspect.getsourcefile(lambda:0))) + '/vagrant_run'
-		shutit.cfg[self.module_id]['vagrant_run_dir'] = run_dir + '/' + module_name
 		module_name = 'swarm_' + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
+		shutit.cfg[self.module_id]['vagrant_run_dir'] = run_dir + '/' + module_name
 		shutit.send('command rm -rf ' + run_dir + '/' + module_name + ' && command mkdir -p ' + run_dir + '/' + module_name + ' && command cd ' + run_dir + '/' + module_name)
 		if shutit.send_and_get_output('vagrant plugin list | grep landrush') == '':
 			shutit.send('vagrant plugin install landrush')
@@ -45,6 +45,8 @@ end''')
 			shutit.multisend('vagrant up --provider ' + shutit.cfg['shutit-library.virtualization.virtualization.virtualization']['virt_method'],{'assword for':pw},timeout=99999)
 		except:
 			shutit.multisend('vagrant up',{'assword for':pw},timeout=99999)
+		shutit.begin_asciinema_session(title='Funker demo')
+		shutit.pause_point('')
 		swarm1_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm1.vagrant.test | awk '{print $2}' ''')
 		swarm2_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm2.vagrant.test | awk '{print $2}' ''')
 		swarm3_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm3.vagrant.test | awk '{print $2}' ''')
