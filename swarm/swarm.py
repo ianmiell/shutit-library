@@ -12,7 +12,8 @@ class swarm(ShutItModule):
 		vagrant_provider = shutit.cfg[self.module_id]['vagrant_provider']
 		gui = shutit.cfg[self.module_id]['gui']
 		memory = shutit.cfg[self.module_id]['memory']
-		run_dir = os.path.dirname(os.path.abspath(inspect.getsourcefile(lambda:0))) + '/vagrant_run'
+		shutit.cfg[self.module_id]['vagrant_run_dir'] = os.path.dirname(os.path.abspath(inspect.getsourcefile(lambda:0))) + '/vagrant_run'
+		run_dir = shutit.cfg[self.module_id]['vagrant_run_dir']
 		module_name = 'swarm_' + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
 		shutit.send('command rm -rf ' + run_dir + '/' + module_name + ' && command mkdir -p ' + run_dir + '/' + module_name + ' && command cd ' + run_dir + '/' + module_name)
 		if shutit.send_and_get_output('vagrant plugin list | grep landrush') == '':
@@ -89,8 +90,6 @@ end''')
 		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm1_ip + ' --engine-env GODEBUG=netdns=cgo --swarm --swarm-master --swarm-discovery token://' + token + ' swarm1')
 		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm2_ip + ' --engine-env GODEBUG=netdns=cgo --swarm --swarm-discovery token://' + token + ' swarm2')
 		shutit.send('docker-machine create -d generic --generic-ip-address ' + swarm3_ip + ' --engine-env GODEBUG=netdns=cgo --swarm --swarm-discovery token://' + token + ' swarm3')
-
-		shutit.pause_point(token)
 		shutit.logout()
 		shutit.logout()
 		return True
@@ -100,6 +99,7 @@ end''')
 		shutit.get_config(self.module_id,'vagrant_provider',default='virtualbox')
 		shutit.get_config(self.module_id,'gui',default='false')
 		shutit.get_config(self.module_id,'memory',default='1024')
+		shutit.get_config(self.module_id,'vagrant_run_dir',default=None)
 		return True
 
 def module():
