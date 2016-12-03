@@ -80,9 +80,10 @@ end''')
 		
 		shutit.login(command='vagrant ssh swarm1')
 		shutit.login(command='sudo su -',password='vagrant')
-		shutit.install('docker')
+		shutit.send(' curl -fsSL https://get.docker.com/ | sh')
+		shutit.send('systemctl enable docker.service')
 		# Workaround required for dns/landrush/docker issues: https://github.com/docker/docker/issues/18842
-		shutit.insert_text('Environment=GODEBUG=netdns=cgo','/usr/lib/systemd/system/docker.service',pattern='Environment=.*')
+		shutit.insert_text('Environment=GODEBUG=netdns=cgo','/usr/lib/systemd/system/docker.service',pattern='.Service.')
 		shutit.send('systemctl daemon-reload')
 		shutit.send('systemctl restart docker')
 		shutit.send('curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && chmod +x /usr/local/bin/docker-machine')
