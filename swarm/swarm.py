@@ -47,8 +47,8 @@ end''')
 			shutit.multisend('vagrant up',{'assword for':pw},timeout=99999)
 		# Thanks mostly to: http://blog.hypriot.com/post/swarm-machines-or-having-fun-with-docker-machine-and-the-new-docker-swarm-orchestration/
 		swarm1_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm1.vagrant.test | awk '{print $2}' ''')
-		swarm2_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm1.vagrant.test | awk '{print $2}' ''')
-		swarm3_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm2.vagrant.test | awk '{print $2}' ''')
+		swarm2_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm2.vagrant.test | awk '{print $2}' ''')
+		swarm3_ip = shutit.send_and_get_output('''vagrant landrush ls | grep -w ^swarm3.vagrant.test | awk '{print $2}' ''')
 		machines = [['swarm1','swarm1.vagrant.test',swarm1_ip],['swarm2','swarm1.vagrant.test',swarm1_ip],['swarm3','swarm2.vagrant.test',swarm2_ip]]
 		for machine in machines:
 			shutit.login(command='vagrant ssh ' + machine[0])
@@ -103,7 +103,6 @@ end''')
 		shutit.send(join_cmd)
 		shutit.send('eval $(docker-machine env swarm1)')
 		shutit.send('docker node ls')
-		shutit.pause_point('')
 		shutit.logout()
 		shutit.logout()
 		return True
