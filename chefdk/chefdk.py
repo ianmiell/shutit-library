@@ -22,7 +22,7 @@ class chefdk(ShutItModule):
 
 def module():
 		return chefdk(
-			'shutit-test.chefdk.chefdk', 0.1649027060,
+			'shutit-library.chefdk.chefdk', 0.1649027060,
 			description='',
 			maintainer='',
 			delivery_methods=['bash'],

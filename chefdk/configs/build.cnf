@@ -7,5 +7,5 @@
 ###############################################################################
 # When this module is the one being built, which modules should be built along with it by default?
 # This feeds into automated testing of each module.
-[shutit-test.chefdk.chefdk]
+[shutit-library.chefdk.chefdk]
 shutit.core.module.build:yes
