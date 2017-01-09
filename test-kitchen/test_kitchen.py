@@ -4,7 +4,12 @@ class test_kitchen(ShutItModule):
 
 
 	def build(self, shutit):
-		# TODO: https://github.com/test-kitchen/test-kitchen/wiki/Getting-Started
+		if shutit.whoiam != 'root':
+			shutit.fail('must be root')
+		if not shutit.command_exists('gem'):
+			shutit.fail('gem must be available')
+		shutit.send('gem install test-kitchen')
+		shutit.send('gem install kitchen-vagrant')
 		return True
 
 def module():
