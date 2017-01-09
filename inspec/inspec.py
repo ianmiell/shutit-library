@@ -4,8 +4,18 @@ class inspec(ShutItModule):
 
 
 	def build(self, shutit):
-		shutit.send('gem install rake')
-		shutit.send('gem install inspec')
+		if not shutit.command_available('rake'):
+			if shutit.send_and_expect('whoami') != 'root':
+				shutit.fail('must be root')
+			if not shutit.command_exists('gem'):
+				shutit.fail('gem must be available')
+			shutit.send('gem install rake')
+		if not shutit.command_available('inspec'):
+			if shutit.send_and_expect('whoami') != 'root':
+				shutit.fail('must be root')
+			if not shutit.command_exists('gem'):
+				shutit.fail('gem must be available')
+			shutit.send('gem install inspec')
 		return True
 
 def module():
