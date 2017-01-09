@@ -18,6 +18,9 @@ class chefdk(ShutItModule):
 				shutit.multisend('sudo rpm -i /tmp/chefdk.rpm',{'assword':pw})
 			else:
 				shutit.install('chefdk')
+			# Chef is installed here, but not in path
+			shutit.send('pushd /opt/chefdk/bin')
+			shutit.send('''echo 'eval "$(./chef shell-init bash)"' >> ~/.bash_profile''')
 		return True
 
 def module():
