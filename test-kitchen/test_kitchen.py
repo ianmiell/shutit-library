@@ -14,7 +14,7 @@ class test_kitchen(ShutItModule):
 
 def module():
 		return test_kitchen(
-			'git.test_kitchen.test_kitchen', 0.9549975645,
+			'shutit-library.test_kitchen.test_kitchen', 0.9549975645,
 			description='',
 			maintainer='',
 			delivery_methods=['bash'],
