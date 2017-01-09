@@ -10,9 +10,9 @@ class inspec(ShutItModule):
 
 def module():
 		return inspec(
-			'shutit-library.inspec.inspec', 544526579.0001,
+			'shutit-library.inspec.inspec', 0.9555141983517,
 			description='',
 			maintainer='',
 			delivery_methods=['bash'],
-			depends=['shutit-library.kitchen.kitchen']
+			depends=['shutit-library.test_kitchen.test_kitchen']
 		)
