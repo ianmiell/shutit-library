@@ -10,11 +10,11 @@ class chefdk(ShutItModule):
 		if not shutit.command_available('chef-solo'):
 			if shutit.get_current_shutit_pexpect_session_environment().install_type == 'apt':
 				pw = shutit.get_env_pass('Input your sudo password to install chefdk')
-				shutit.send('wget -qO- https://packages.chef.io/stable/ubuntu/12.04/chefdk_1.0.3-1_amd64.deb > /tmp/chefdk.deb')
+				shutit.send('wget -qO- https://packages.chef.io/files/stable/chefdk/1.1.16/ubuntu/16.04/chefdk_1.1.16-1_amd64.deb > /tmp/chefdk.deb')
 				shutit.multisend('sudo dpkg -i /tmp/chefdk.deb',{'assword':pw})
 			elif shutit.get_current_shutit_pexpect_session_environment().install_type == 'yum':
 				pw = shutit.get_env_pass('Input your sudo password to install chefdk')
-				shutit.send('wget -qO- https://packages.chef.io/stable/ubuntu/12.04/chefdk_1.0.3-1_amd64.deb > /tmp/chefdk.rpm')
+				shutit.send('wget -qO- https://packages.chef.io/files/stable/chefdk/1.1.16/el/7/chefdk-1.1.16-1.el7.x86_64.rpm > /tmp/chefdk.rpm')
 				shutit.multisend('sudo rpm -i /tmp/chefdk.rpm',{'assword':pw})
 			else:
 				shutit.install('chefdk')
