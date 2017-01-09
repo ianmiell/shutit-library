@@ -16,6 +16,9 @@ class inspec(ShutItModule):
 			if not shutit.command_exists('gem'):
 				shutit.fail('gem must be available')
 			shutit.send('gem install inspec')
+			if not shutit.command_exists('gem'):
+				shutit.fail('gem must be available')
+			shutit.send('gem install kitchen-inspec')
 		return True
 
 def module():
