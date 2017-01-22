@@ -101,7 +101,6 @@ end''')
 		shutit.send(join_cmd)
 		shutit.send('eval $(docker-machine env swarm1)')
 		shutit.send('docker node ls')
-		shutit.pause_point('In swarm')
 		shutit.logout()
 		shutit.logout()
 		return True

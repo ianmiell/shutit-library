@@ -21,6 +21,7 @@ class chefdk(ShutItModule):
 			# Chef is installed here, but not in path
 			shutit.send('pushd /opt/chefdk/bin')
 			shutit.send('''echo 'eval "$(./chef shell-init bash)"' >> ~/.bash_profile''')
+			shutit.send('''echo 'eval "$(./chef shell-init bash)"' >> ~/.bashrc''')
 		return True
 
 def module():
