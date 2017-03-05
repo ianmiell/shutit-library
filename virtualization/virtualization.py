@@ -22,6 +22,7 @@ class virtualization(ShutItModule):
 				shutit.install('libvirt-devel')
 				shutit.install('qemu-kvm')
 				shutit.send('systemctl start libvirtd')
+			# TODO: do we need to ensure 'vagrant plugin vagrant-libvirt installed' as well?
 		else:
 			shutit.fail(self.module_id + ' requires virt_method to be set correctly (virtualbox or libvirt)')
 		return True
