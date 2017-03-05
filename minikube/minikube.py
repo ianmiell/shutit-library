@@ -19,7 +19,7 @@ class minikube(ShutItModule):
 			shutit.send('chmod +x minikube')
 			shutit.send('sudo mv minikube /usr/local/bin/minikube')
 		if not shutit.send_and_get_output('''minikube status | grep 'Does Not Exist' | wc -l | awk '{print $1}' ''') == '1':
-			shutit.send('./minikube start')
+			shutit.send('minikube start')
 		return True
 
 def module():
