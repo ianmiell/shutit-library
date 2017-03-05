@@ -5,16 +5,16 @@ class minikube(ShutItModule):
 
 	def build(self, shutit):
 		if not shutit.command_available('kubectl'):
-            if shutit.send_and_get_output('uname') == 'Darwin':                                                                                                                                   
-                shutit.send('curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl')                                                                                                                                     
-            else:                                                                                                                                                                                 
-                shutit.send('curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl')                                                           
+			if shutit.send_and_get_output('uname') == 'Darwin':																																   
+				shutit.send('curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl')																																	 
+			else:																																												 
+				shutit.send('curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl')														   
 			shutit.send('chmod +x kubectl')
 			shutit.send('sudo mv kubectl /usr/local/bin/kubectl')
 		if not shutit.command_available('minikube'):
-            if shutit.send_and_get_output('uname') == 'Darwin':                                                                                                                                   
+			if shutit.send_and_get_output('uname') == 'Darwin':																																   
 				shutit.send('curl -LO https://storage.googleapis.com/minikube/release/$(curl -s https://storage.googleapis.com/minikube/release/stable.txt)/bin/darwin/amd64/minikube')
-            else:                                                                                                                                                                                 
+			else:																																												 
 				shutit.send('curl -LO https://storage.googleapis.com/minikube/release/$(curl -s https://storage.googleapis.com/minikube/release/stable.txt)/bin/linux/amd64/minikube')
 			shutit.send('chmod +x minikube')
 			shutit.send('sudo mv minikube /usr/local/bin/minikube')
