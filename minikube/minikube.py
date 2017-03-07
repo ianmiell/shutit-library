@@ -13,9 +13,11 @@ class minikube(ShutItModule):
 			shutit.send('sudo mv kubectl /usr/local/bin/kubectl')
 		if not shutit.command_available('minikube'):
 			if shutit.send_and_get_output('uname') == 'Darwin':
-				shutit.send('curl -LO https://storage.googleapis.com/minikube/releases/$(curl -s https://storage.googleapis.com/minikube/releases/stable.txt)/minikube-darwin-amd64')
+				shutit.send('curl -LO https://storage.googleapis.com/minikube/releases/v$(curl -s https://storage.googleapis.com/minikube/releases/stable.txt)/minikube-darwin-amd64')
+				shutit.send('mv minikube-darwin-amd64 minikube')
 			else:
-				shutit.send('curl -LO https://storage.googleapis.com/minikube/releases/$(curl -s https://storage.googleapis.com/minikube/releases/stable.txt)/minikube-linux-amd64')
+				shutit.send('curl -LO https://storage.googleapis.com/minikube/releases/v$(curl -s https://storage.googleapis.com/minikube/releases/stable.txt)/minikube-linux-amd64')
+				shutit.send('mv minikube-linux-amd64 minikube')
 			shutit.send('chmod +x minikube')
 			shutit.send('sudo mv minikube /usr/local/bin/minikube')
 		if not shutit.send_and_get_output('''minikube status | grep 'Does Not Exist' | wc -l | awk '{print $1}' ''') == '1':
