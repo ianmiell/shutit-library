@@ -20,6 +20,10 @@ class minikube(ShutItModule):
 				shutit.send('mv minikube-linux-amd64 minikube')
 			shutit.send('chmod +x minikube')
 			shutit.send('sudo mv minikube /usr/local/bin/minikube')
+		else:
+			shutit.pause_point('Want to remove minikube?')
+			shutit.send('rm -rf ~/.minikube')
+			shutit.multisend('minikube delete',{'Y/n':'Y'})
 		if not shutit.send_and_get_output('''minikube status | grep 'Does Not Exist' | wc -l | awk '{print $1}' ''') == '1':
 			shutit.send('minikube start')
 		return True
