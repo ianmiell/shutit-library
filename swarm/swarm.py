@@ -36,7 +36,7 @@ fi''')
 		memory = shutit.cfg[self.module_id]['memory']
 		run_dir = os.path.dirname(os.path.abspath(inspect.getsourcefile(lambda:0))) + '/vagrant_run'
 		module_name = 'swarm_' + ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
-		shutit.cfg[self.module_id]['vagrant_run_dir'] = run_dir + '/' + module_name
+		shutit.cfg['vagrant_run_dir'] = run_dir + '/' + module_name
 		shutit.send('command rm -rf ' + run_dir + '/' + module_name + ' && command mkdir -p ' + run_dir + '/' + module_name + ' && command cd ' + run_dir + '/' + module_name)
 		if shutit.send_and_get_output('vagrant plugin list | grep landrush') == '':
 			shutit.send('vagrant plugin install landrush')
@@ -132,7 +132,6 @@ end''')
 		shutit.get_config(self.module_id,'vagrant_provider',default='virtualbox')
 		shutit.get_config(self.module_id,'gui',default='false')
 		shutit.get_config(self.module_id,'memory',default='1024')
-		shutit.get_config(self.module_id,'vagrant_run_dir',default='/tmp')
 		return True
 
 	def is_installed(self, shutit):

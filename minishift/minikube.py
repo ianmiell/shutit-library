@@ -35,5 +35,5 @@ def module():
 			description='',
 			maintainer='',
 			delivery_methods=['bash'],
-			depends=['shutit-library.virtualization.virtualization.virtualization']
+			depends=['shutit.tk.setup']
 		)
