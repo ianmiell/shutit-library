@@ -4,7 +4,7 @@ class minishift(ShutItModule):
 
 
 	def build(self, shutit):
-		if not shutit.command_available('minishift')
+		if not shutit.command_available('minishift'):
 			shutit.send('curl -LO https://github.com/minishift/minishift/releases/download/v1.0.0-beta.5/minishift-1.0.0-beta.5-linux-amd64.tgz | tar -zxvf')
 		shutit.send('minishift start')
 		shutit.add_to_bashrc('PATH=$PATH:~/.minishift/cache/oc/v1.4.1')
