@@ -20,19 +20,25 @@
 #IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 #CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from shutit_module import ShutItModule
+import os
+
+class apt_mirror(ShutItModule):
+
 	def build(self, shutit):
-		return True
-                                 
-	def get_config(self, shutit):
-		shutit.get_config(self.module_id,'access_key')
-		shutit.get_config(self.module_id,'secret_key')
+		#http://unixrob.blogspot.co.uk/2012/05/create-apt-mirror-with-ubuntu-1204-lts.html
+		shutit.install('apt-mirror')
+		shutit.install('apache2')
+		shutit.send('/var/spool/apt-mirror/var/clean.sh')
+		shutit.send('ln -s /var/spool/apt-mirror/mirror/gb.archive.ubuntu.com/ubuntu/ /var/www/ubuntu')
+		shutit.send('ln -s /var/spool/apt-mirror/mirror/apt.puppetlabs.com /var/www/puppet')
+		shutit.send('apt-mirror')
 		return True
 
 def module():
-		return aws(
-			'tk.shutit.aws.aws', 0.0218611513,   
-			description='',
-			maintainer='',
-			delivery_methods=['bash','docker','dockerfile','ssh'],
-			depends=['shutit.tk.setup']
-		)
+	return apt_mirror(
+		'shutit.tk.apt_mirror.apt_mirror', 0.801,
+		description='apt mirror builder',
+		depends=['shutit.tk.setup']
+	)
+
