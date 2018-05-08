@@ -2,10 +2,10 @@
 https://github.com/homebrew/linuxbrew
 """
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 
-class linuxbrew(ShutItModule):
+class linuxbrew(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('ruby')

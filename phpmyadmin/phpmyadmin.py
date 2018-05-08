@@ -1,7 +1,7 @@
 # Created from dockerfile: /space/git/dockerfiles_repos/Thermionix/Dockerfiles/phpmyadmin/Dockerfile
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class phpmyadmin(ShutItModule):
+class phpmyadmin(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('nginx phpmyadmin mcrypt libmcrypt-dev')

@@ -1,6 +1,6 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class mysql(ShutItModule):
+class mysql(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		root_pass = shutit.cfg['shutit.tk.mysql.mysql']['root_password']

@@ -1,9 +1,9 @@
 
 # Created from dockerfile: /space/git/shutit/tmp/Dockerfile
 # Maintainer:              
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class redis(ShutItModule):
+class redis(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		# https://github.com/dockerfile/redis

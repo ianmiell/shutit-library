@@ -1,6 +1,6 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class ssh_server(ShutItModule):
+class ssh_server(shutit_module.ShutItModule):
 
 	def is_installed(self, shutit):
 		shutit.file_exists('/root/start_ssh_server.sh')

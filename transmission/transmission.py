@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/Thermionix/Dockerfiles/transmission/Dockerfile
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class transmission(ShutItModule):
+class transmission(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('transmission-daemon')

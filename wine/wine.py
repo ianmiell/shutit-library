@@ -1,9 +1,9 @@
 
 # Created from dockerfile: /tmp/b/Dockerfile
 # Maintainer:              Brandon R. Stoner <monokrome@monokro.me>
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class wine(ShutItModule):
+class wine(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('python-software-properties')

@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/SvenDowideit/dockerfiles/camlistore//Dockerfile
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class camlistore(ShutItModule):
+class camlistore(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('git golang',force=True)

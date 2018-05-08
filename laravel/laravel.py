@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 
-class laravel(ShutItModule):
+class laravel(shutit_module.ShutItModule):
 
 
 	def build(self, shutit):

@@ -1,7 +1,7 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 import os
 
-class hostx(ShutItModule):
+class hostx(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.send('groupadd -g ' + shutit.cfg[self.module_id]['gid'] + ' ' + shutit.cfg[self.module_id]['username'])

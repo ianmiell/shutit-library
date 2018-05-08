@@ -3,9 +3,9 @@
 # Maintainer:              Alan Boudreault "boudreault.alan@gmail.com"
 
 # See also http://oskarhane.com/haproxy-as-a-static-reverse-proxy-for-docker-containers/
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class haproxy(ShutItModule):
+class haproxy(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.send('export HAPROXY_VERSION=1.5-dev22')

@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 
-class chef(ShutItModule):
+class chef(shutit_module.ShutItModule):
 
 
 	def build(self, shutit):

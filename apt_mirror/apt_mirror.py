@@ -20,10 +20,10 @@
 #IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 #CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 import os
 
-class apt_mirror(ShutItModule):
+class apt_mirror(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		#http://unixrob.blogspot.co.uk/2012/05/create-apt-mirror-with-ubuntu-1204-lts.html

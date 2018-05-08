@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 
-class pgcharts(ShutItModule):
+class pgcharts(shutit_module.ShutItModule):
 
 
 	def build(self, shutit):

@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 
-class postgres_9_5(ShutItModule):
+class postgres_9_5(shutit_module.ShutItModule):
 
 	def build(self,shutit):
 		# From: docker hub, postgres 9.5

@@ -2,9 +2,9 @@
 """
 # Created from dockerfile: /space/git/dockerfiles_repos/puppet/Dockerfile
 # Maintainer:              James Turnbull "james@lovedthanlost.net"
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class puppet(ShutItModule):
+class puppet(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('puppet')

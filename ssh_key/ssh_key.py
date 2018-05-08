@@ -1,7 +1,7 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 import os
 
-class ssh_key(ShutItModule):
+class ssh_key(shutit_module.ShutItModule):
 
 	def is_install(self, shutit):
 		return False

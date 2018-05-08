@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 
-class pg_bulkload(ShutItModule):
+class pg_bulkload(shutit_module.ShutItModule):
 
 
 	def build(self, shutit):

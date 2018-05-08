@@ -1,7 +1,7 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 import os
 
-class copy_ssh_key(ShutItModule):
+class copy_ssh_key(shutit_module.ShutItModule):
 
 	def check_ready(self,shutit):
 		files = [

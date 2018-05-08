@@ -1,6 +1,6 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class chefdk(ShutItModule):
+class chefdk(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		# TODO: version number, rpm download

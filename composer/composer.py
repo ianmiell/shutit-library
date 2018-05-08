@@ -20,9 +20,9 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class composer(ShutItModule):
+class composer(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('curl')

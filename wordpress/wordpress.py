@@ -1,8 +1,8 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 #https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-on-ubuntu-14-04
 
-class wordpress(ShutItModule):
+class wordpress(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('apache2 wget php5-gd libssh2-php')

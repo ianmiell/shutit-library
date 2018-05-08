@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 
-class record_shutit_build(ShutItModule):
+class record_shutit_build(shutit_module.ShutItModule):
 
 	def is_installed(self, shutit):
 		# Always run this

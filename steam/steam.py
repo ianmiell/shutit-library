@@ -1,8 +1,8 @@
 
 # Created from dockerfile: https://raw.githubusercontent.com/tianon/dockerfiles/master/steam/Dockerfile
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class steam(ShutItModule):
+class steam(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('steam-launcher')

@@ -1,9 +1,9 @@
 
 # Created from dockerfile: https://gist.githubusercontent.com/iMelnik/dffadd951f8c73402254/raw/02acc8ff50e9b180f97b84cd64f051acc9e09103/Dockerfile
 # Maintainer:              Sergey Melnik "smelnik@onetwotrip.com"
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class cloudera(ShutItModule):
+class cloudera(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('curl')

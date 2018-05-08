@@ -1,6 +1,6 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class aws(ShutItModule):
+class aws(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		return True

@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
 
-class osquery(ShutItModule):
+class osquery(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('software-properties-common')

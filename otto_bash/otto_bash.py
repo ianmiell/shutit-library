@@ -1,6 +1,6 @@
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class otto_bash(ShutItModule):
+class otto_bash(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.send('rm -rf /tmp/otto_bash && mkdir -p /tmp/otto_bash && cd /tmp/otto_bash')

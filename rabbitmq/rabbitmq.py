@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/dockerfiles/rabbitmq/Dockerfile
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class rabbitmq(ShutItModule):
+class rabbitmq(shutit_module.ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('wget logrotate rabbitmq-server')

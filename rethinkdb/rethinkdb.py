@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/dockerfile-examples/rethinkdb/Dockerfile
-from shutit_module import ShutItModule
+from shutit import shutit_module
 
-class rethinkdb(ShutItModule):
+class rethinkdb(shutit_module.ShutItModule):
 
 	def is_installed(self, shutit):
 		return False
