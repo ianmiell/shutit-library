@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class minikube(shutit_module.ShutItModule):
+class minikube(ShutItModule):
 
 
 	def build(self, shutit):

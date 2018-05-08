@@ -1,7 +1,7 @@
 # Created from dockerfile: /space/git/dockerfiles_repos/dockerfile-examples/nodejs/Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class nodejs(shutit_module.ShutItModule):
+class nodejs(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('lsb-release')

@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class virtualization(shutit_module.ShutItModule):
+class virtualization(ShutItModule):
 
 	def build(self, shutit):
 		cfg = shutit.cfg

@@ -1,9 +1,9 @@
 """ShutIt module. See http://shutit.tk
 """
-from shutit import shutit_module
+from shutit_module import ShutItModule
 import os
 
-class squid_deb_proxy(shutit_module.ShutItModule):
+class squid_deb_proxy(ShutItModule):
 
 	def build(self, shutit):
 		# This sets up the avahi daemon such that the squid deb proxy can run.

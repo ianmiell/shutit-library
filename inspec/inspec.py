@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class inspec(shutit_module.ShutItModule):
+class inspec(ShutItModule):
 
 
 	def build(self, shutit):

@@ -3,10 +3,10 @@
 Runs a psty server
 """
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
 
-class psty(shutit_module.ShutItModule):
+class psty(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('python')

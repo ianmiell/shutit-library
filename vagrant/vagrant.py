@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
 
-class vagrant(shutit_module.ShutItModule):
+class vagrant(ShutItModule):
 
 
 	def build(self, shutit):

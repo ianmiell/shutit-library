@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/dockerfile-examples/couchdb/Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class couchdb(shutit_module.ShutItModule):
+class couchdb(ShutItModule):
 
 	def build(self, shutit):
 		shutit.send('echo "deb http://us.archive.ubuntu.com/ubuntu/ precise universe" >> /etc/apt/sources.list')

@@ -1,7 +1,7 @@
 # Created from dockerfile: ./Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class plex(shutit_module.ShutItModule):
+class plex(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('wget')

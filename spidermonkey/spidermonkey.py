@@ -1,9 +1,9 @@
 
 # Created from dockerfile: /tmp/a/Dockerfile
 # Maintainer:              Joao Paulo Dubas &quot;joao.dubas@gmail.com&quot;
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class spidermonkey(shutit_module.ShutItModule):
+class spidermonkey(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('zip unzip libnspr4-dev wget')

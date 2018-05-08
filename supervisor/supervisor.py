@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /tmp/supervisor/Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class supervisor(shutit_module.ShutItModule):
+class supervisor(ShutItModule):
 
 	def build(self, shutit):
 		shutit.send('echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list')

@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class docker(shutit_module.ShutItModule):
+class docker(ShutItModule):
 
 	def build(self, shutit):
 		if shutit.get_current_environment()['distro'] == 'ubuntu':

@@ -1,7 +1,7 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 import os
 
-class win2048(shutit_module.ShutItModule):
+class win2048(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('firefox')

@@ -1,7 +1,7 @@
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class django(shutit_module.ShutItModule):
+class django(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('software-properties-common')

@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class berkshelf(shutit_module.ShutItModule):
+class berkshelf(ShutItModule):
 
 
 	def build(self, shutit):

@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
 
-class httpdiff(shutit_module.ShutItModule):
+class httpdiff(ShutItModule):
 
 
 	def build(self, shutit):

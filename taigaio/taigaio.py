@@ -1,8 +1,8 @@
 """ShutIt module. See http://shutit.tk
 """
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class taigaio(shutit_module.ShutItModule):
+class taigaio(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('adduser')

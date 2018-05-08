@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class postgres(shutit_module.ShutItModule):
+class postgres(ShutItModule):
 
 	def build(self, shutit):
 		shutit.send("""cat > /root/stop_postgres.sh <<< 'service postgresql stop'""")

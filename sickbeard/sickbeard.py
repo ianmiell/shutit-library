@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/Thermionix/Dockerfiles/sickbeard/Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class sickbeard(shutit_module.ShutItModule):
+class sickbeard(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('git python python-cheetah')

@@ -1,11 +1,11 @@
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
 #cf http://www.spinellis.gr/blog/20130619/
 
-class git_server(shutit_module.ShutItModule):
+class git_server(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('apache2')

@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/SvenDowideit/dockerfiles/minimal-linux/Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class minimal_linux(shutit_module.ShutItModule):
+class minimal_linux(ShutItModule):
 
 	def build(self, shutit):
 		shutit.send('export KERNEL_VERSION=' + shutit.cfg[self.module_id]['version'])

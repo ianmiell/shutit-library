@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class phantomjs(shutit_module.ShutItModule):
+class phantomjs(ShutItModule):
 
 	def build(self, shutit):
 		shutit.send('pushd /opt')

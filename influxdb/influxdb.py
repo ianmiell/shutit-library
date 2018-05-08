@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/Dockerfiles/influxdb/Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class influxdb(shutit_module.ShutItModule):
+class influxdb(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('wget')

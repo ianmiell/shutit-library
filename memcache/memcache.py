@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class memcache(shutit_module.ShutItModule):
+class memcache(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('memcached')

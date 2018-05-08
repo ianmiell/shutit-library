@@ -20,10 +20,10 @@
 #IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 #CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 import os
 
-class apache_proxypass(shutit_module.ShutItModule):
+class apache_proxypass(ShutItModule):
 	
 	def build(self, shutit):
 		# Based on: http://www.jamescoyle.net/how-to/116-simple-apache-reverse-proxy-example

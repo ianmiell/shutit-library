@@ -1,10 +1,10 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
 
-class otto(shutit_module.ShutItModule):
+class otto(ShutItModule):
 
 	def build(self, shutit):
 		shutit.install('git')

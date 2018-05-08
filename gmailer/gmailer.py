@@ -1,9 +1,9 @@
 """ShutIt module. See http://shutit.tk
 """
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class gmailer(shutit_module.ShutItModule):
+class gmailer(ShutItModule):
 
 	def build(self,shutit):
 		shutit.install('mailutils')

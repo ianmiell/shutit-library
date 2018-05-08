@@ -1,8 +1,8 @@
 
 # Created from dockerfile: /space/git/dockerfiles_repos/billt2006/docker-btsync/Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class btsync(shutit_module.ShutItModule):
+class btsync(ShutItModule):
 
 	def build(self, shutit):
 		shutit.send('apt-get install -y curl')

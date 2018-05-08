@@ -20,9 +20,9 @@
 #IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 #CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class jenkins(shutit_module.ShutItModule):
+class jenkins(ShutItModule):
 
 	def build(self,shutit):
 		shutit.install('wget')

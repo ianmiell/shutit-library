@@ -1,6 +1,6 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class minishift(shutit_module.ShutItModule):
+class minishift(ShutItModule):
 
 
 	def build(self, shutit):

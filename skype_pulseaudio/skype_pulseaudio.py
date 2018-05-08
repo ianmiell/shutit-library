@@ -1,8 +1,8 @@
 
 # Created from dockerfile: https://raw.githubusercontent.com/tomparys/docker-skype-pulseaudio/master/Dockerfile
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
-class skype_pulseaudio(shutit_module.ShutItModule):
+class skype_pulseaudio(ShutItModule):
 	def build(self, shutit):
 		shutit.send('export DEBIAN_FRONTEND=noninteractive')
 		shutit.send('dpkg --add-architecture i386')

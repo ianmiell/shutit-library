@@ -1,10 +1,10 @@
-from shutit import shutit_module
+from shutit_module import ShutItModule
 
 import base64
 
 #From: https://groups.google.com/forum/#!topic/docker-user/D0n-lURDn0o
 # Expose port 5901 and 6080
-class vnc(shutit_module.ShutItModule):
+class vnc(ShutItModule):
 
 	def check_ready(self, shutit):
 		"""Only apt-based systems are supported support atm
